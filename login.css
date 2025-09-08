@@ -1,0 +1,150 @@
+/* Page background and frame */
+body {
+  margin: 0;
+  font-family: "Georgia", serif;
+  background: #e6f4f4; /* pale cyan */
+}
+
+/* Outer thin blue border around the page content (like your original) */
+.page-frame {
+  border: 3px solid #83b9e0; /* adjust to match your screenshot border color */
+  padding: 22px;
+  min-height: calc(100vh - 44px);
+  box-sizing: border-box;
+}
+
+/* main layout: left form, right image */
+.container {
+  display: flex;
+  background-color: #a1bcdb;
+  gap: 36px;              /* big gap between form and image */
+  align-items: flex-start;
+  max-width: 1000px;
+  margin: 18px auto;      /* centers the whole login area */
+  padding: 6px;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+/* LEFT: Login card (large light card) */
+.login-card {
+  background: #f8ffff;
+  width: 720px;           /* wide left card like your image */
+  padding: 40px 48px 36px 48px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  box-sizing: border-box;
+}
+
+/* title row: small icon left, large centered-ish title */
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+/* optional small icon at left of title (replace file path or hide) */
+.title-icon {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  transform: translateY(-6px); /* visually align with italic title */
+}
+
+/* big italic brown title to match screenshot */
+.page-title {
+  color: #6b2f00; /* brown */
+  font-size: 44px; 
+  line-height: 0.95;
+  margin: 0;
+  font-style: italic;
+  text-align: left; /* left aligned inside card (appears centered across full page in original) */
+  letter-spacing: 0.6px;
+}
+
+/* form fields - large labels, big gray input bars like screenshot */
+.login-form label {
+  display: block;
+  margin: 22px 0 8px 0;
+  font-size: 20px;  /* large label */
+  color: #2e2e2e;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  width: 100%;
+  padding: 18px 20px; /* taller input bars */
+  border-radius: 6px;
+  border: 1px solid #cfcfcf;
+  background: #e5e5e5; /* pale gray bar */
+  font-size: 16px;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+  -moz-appearance: none;
+}
+
+/* specific styles for the role select dropdown */
+.login-form select {
+  width: 100%;
+  padding: 18px 20px;
+  border-radius: 6px;
+  border: 1px solid #cfcfcf;
+  background: #e5e5e5 url('data:image/svg+xml;utf8,<svg fill="%23666" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 12px center/18px 18px;
+  padding-right: 38px;
+  cursor: pointer;
+  height: 56px;
+  -webkit-appearance: none;
+  appearance: none;
+  -moz-appearance: none;
+}
+
+/* big cyan CTA button similar to original screenshot */
+.login-btn {
+  display: block;
+  width: 100%;
+  margin-top: 26px;
+  padding: 14px 18px;
+  background: #9fe1ff;     /* lighter cyan background */
+  color: #0b57a1;         /* deep blue text */
+  font-weight: 700;
+  font-size: 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.06);
+}
+
+.login-btn:hover {
+  background: #6ec6ff;
+  color: #062b57;
+}
+
+/* forgotten link */
+.forgot {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 15px;
+  color: #363636;
+}
+
+.forgot a {
+  color: #444;
+  text-decoration: none;
+}
+
+.image{
+    width: 200px;
+    height: auto;
+    margin-top: 250px;
+    
+}
+
+/* Optional: style for focus and hover */
+.login-form select:focus {
+    border-color: #2196f3;
+    outline: none;
+}
+
+
