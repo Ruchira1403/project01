@@ -1,12 +1,55 @@
 <?php
 include_once 'header.php';
 ?>
-<div class="container">
-    <div class="login-box">
-        <h2>Welcome to Project01</h2>
-        <p style="text-align:center;">
-            <a href="login.php">Login</a> | <a href="signup.php">Sign Up</a> 
-        </p>
+<link rel="stylesheet" href="index.css">
+
+<div class="landing-container">
+    <div class="landing-header">
+        <div class="landing-header-row">
+            <img class="title-icon" src="images/logo.jpg" alt="icon">
+            <h1 class="landing-title">Geo Survey Academic Field Portal</h1>
+        </div>
+        <p class="landing-desc">Streamline field data collection, submission tracking, and academic progress monitoring for surveying programs.</p>
+        <form action="login.php" method="get" style="margin: 0;">
+            <button class="get-started-btn" type="submit">Get Started</button>
+        </form>
+    </div>
+    <div class="landing-features">
+        <div class="feature-card">
+            <div class="feature-icon">🎓</div>
+            <div class="feature-title student">Student Portal</div>
+            <div class="feature-desc">Access assignments, submit work, track progress, and view feedback</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🧑‍🏫</div>
+            <div class="feature-title instructor">Instructor Tools</div>
+            <div class="feature-desc">Manage classes, grade submissions, track attendance, and share resources</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">👤</div>
+            <div class="feature-title admin">Admin Control</div>
+            <div class="feature-desc">User management, system analytics, and comprehensive oversight</div>
+        </div>
+    </div>
+    <div class="landing-stats">
+        <div class="stat-card">
+            <div class="stat-icon">📖</div>
+            <div class="stat-value">150+</div>
+            <div class="stat-label">Active Students</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">👤</div>
+            <div class="stat-value">95%</div>
+            <div class="stat-label">Submission Rate</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-value">12</div>
+            <div class="stat-label">Faculty Members</div>
+        </div>
+    </div>
+    <div class="landing-footer">
+        Faculty of Geomatics<br>Sabaragamuwa University of Sri Lanka
     </div>
 </div>
 <?php

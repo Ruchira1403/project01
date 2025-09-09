@@ -3,13 +3,12 @@ include_once 'header.php';
 ?>
 <link rel="stylesheet" href="login.css">
 
-<div class="page-frame"> <!-- blue page border like your screenshot -->
+<div class="page-frame"> 
   <div class="container">
 
-    <!-- LEFT: login card -->
     <div class="login-card">
       <div class="title-row">
-        <img class="title-icon" src="images/logo.jpg" alt="icon"> <!-- optional small icon -->
+        <img class="title-icon" src="images/logo.jpg" alt="icon"> 
         <h1 class="page-title">
           Welcome to GeoSurvey<br>
           Academic Field Portal
@@ -18,10 +17,10 @@ include_once 'header.php';
 
       <form action="includes/login.inc.php" method="post" class="login-form" autocomplete="off">
         <label for="username">Username</label>
-        <input type="text" id="username" name="username" required>
+        <input type="text" id="username" name="username" required autocomplete="username">
 
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" required>
+        <input type="password" id="password" name="password" required autocomplete="current-password">
 
         <label for="role">Select your Role</label>
         <select id="role" name="role" required>
