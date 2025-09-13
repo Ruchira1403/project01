@@ -9,6 +9,12 @@ include_once 'header.php';
         <input type="text" id="username" name="username" required autocomplete="username"><br><br>
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required autocomplete="email"><br><br>
+        <label for="role">Select your Role:</label>
+        <select id="role" name="role" required>
+            <option value="student">Student</option>
+            <option value="instructor">Instructor</option>
+            <option value="admin">Admin</option>
+        </select><br><br>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required autocomplete="new-password"><br><br>
         <label for="passwordRepeat">Re Enter Password:</label>

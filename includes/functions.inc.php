@@ -19,7 +19,16 @@ function loginUser($conn, $username, $password) {
         $_SESSION["userid"] = $uidExists["usersId"];
         $_SESSION["useruid"] = $uidExists["usersUid"];
         $_SESSION["useremail"] = $uidExists["usersEmail"];
-        header("location: ../home.php");
+        $_SESSION["userrole"] = $uidExists["usersRole"];
+        // Redirect based on role
+        $role = strtolower($uidExists["usersRole"]);
+        if ($role === "admin") {
+            header("location: ../roleLogin/admin.home.php");
+        } elseif ($role === "instructor") {
+            header("location: ../roleLogin/instructor.home.php");
+        } else {
+            header("location: ../roleLogin/student.home.php");
+        }
         exit();
     } else {
         header("location: ../login.php?error=wronglogin");

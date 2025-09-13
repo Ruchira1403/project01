@@ -2,6 +2,7 @@
 if (isset($_POST["submit"])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
+    $role = $_POST["role"];
 
     require_once 'dbh.inc.php';
     require_once 'functions.inc.php';
@@ -11,7 +12,38 @@ if (isset($_POST["submit"])) {
         exit();
     }
 
-    loginUser($conn, $username, $password);
+    $uidExists = uidExists($conn, $username);
+    if ($uidExists === false) {
+        header("location: ../login.php?error=wronglogin");
+        exit();
+    }
+
+    // Check role match
+    if (strtolower($role) !== strtolower($uidExists["usersRole"])) {
+        header("location: ../login.php?error=rolemismatch");
+        exit();
+    }
+
+    $pwdHashed = $uidExists["usersPwd"];
+    if (password_verify($password, $pwdHashed) || $password === $pwdHashed) {
+        session_start();
+        $_SESSION["userid"] = $uidExists["usersId"];
+        $_SESSION["useruid"] = $uidExists["usersUid"];
+        $_SESSION["useremail"] = $uidExists["usersEmail"];
+        $_SESSION["userrole"] = $uidExists["usersRole"];
+        $role = strtolower($uidExists["usersRole"]);
+        if ($role === "admin") {
+            header("location: ../roleLogin/admin.home.php");
+        } elseif ($role === "instructor") {
+            header("location: ../roleLogin/instructor.home.php");
+        } else {
+            header("location: ../roleLogin/student.home.php");
+        }
+        exit();
+    } else {
+        header("location: ../login.php?error=wronglogin");
+        exit();
+    }
 } else {
     header("location: ../login.php");
     exit();
