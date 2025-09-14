@@ -6,13 +6,15 @@ include_once 'header.php';
 <?php
 $errorMsg = '';
 if (isset($_GET['error'])) {
-    if ($_GET['error'] === 'emptyinput') {
-        $errorMsg = 'Please fill in all fields.';
-    } elseif ($_GET['error'] === 'wronglogin') {
-        $errorMsg = 'Incorrect username, password, or account does not exist.';
-    } elseif ($_GET['error'] === 'rolemismatch') {
-        $errorMsg = 'Role is mismatch. Please select the correct role for your account.';
-    }
+  if ($_GET['error'] === 'emptyinput') {
+    $errorMsg = 'Please fill in all fields.';
+  } elseif ($_GET['error'] === 'wronglogin') {
+    $errorMsg = 'Incorrect username, password, or account does not exist.';
+  } elseif ($_GET['error'] === 'rolemismatch') {
+    $errorMsg = 'Role is mismatch. Please select the correct role for your account.';
+  } elseif ($_GET['error'] === 'deactive') {
+    $errorMsg = 'Your account is deactivated. Please contact the administrator.';
+  }
 }
 ?>
 

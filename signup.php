@@ -1,31 +1,35 @@
-<?php
-include_once 'header.php';
-?>
-
-<div class="login-container">
-    <h2>Sign Up</h2>
-    <form action="includes/signup.inc.php" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required autocomplete="username"><br><br>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required autocomplete="email"><br><br>
-        <label for="role">Select your Role:</label>
-        <select id="role" name="role" required>
-            <option value="student">Student</option>
-            <option value="instructor">Instructor</option>
-            <option value="admin">Admin</option>
-        </select><br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required autocomplete="new-password"><br><br>
-        <label for="passwordRepeat">Re Enter Password:</label>
-        <input type="password" id="passwordRepeat" name="passwordRepeat" required autocomplete="new-password"><br><br>
-        <button type="submit">Sign Up</button>
-    </form>
-    <p style="text-align:center;">Already have an account? <a href="login.php">Login</a></p>
-    
+<?php include_once 'header.php'; ?>
+<link rel="stylesheet" href="signup.css">
+<div class="signup-main-bg">
+    <div class="signup-container">
+        <div class="signup-form-col">
+            <h1><img src="images/logo.jpg" alt="Surveyor">Welcome to GeoSurvey Academic Field Portal</h1>
+            <form action="includes/signup.inc.php" method="post">
+                <label for="name">Name with Initials</label>
+                <input type="text" id="name" name="name" required autocomplete="name">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required autocomplete="username">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required autocomplete="email">
+                <label for="role">Select your Role</label>
+                <select id="role" name="role" required>
+                    <option value="student">Student</option>
+                    <option value="instructor">Instructor</option>
+                    <option value="admin">Admin</option>
+                </select>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required autocomplete="new-password">
+                <label for="passwordRepeat">Re Enter Password</label>
+                <input type="password" id="passwordRepeat" name="passwordRepeat" required autocomplete="new-password">
+                <button type="submit">Sign Up</button>
+            </form>
+            <div class="login-link">Already have an account? <a href="login.php">Login</a></div>
+        </div>
+        <div class="signup-img-col">
+            <img src="images/im01.jpg" alt="Surveyor Illustration">
+        </div>
+    </div>
 </div>
-<?php
-include_once 'footer.php';
-?>
+<?php include_once 'footer.php'; ?>
 
 

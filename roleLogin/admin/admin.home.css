@@ -1,0 +1,55 @@
+body { background: #f6fafd; }
+.sidebar {
+    position: fixed; left: 0; top: 0; bottom: 0; width: 240px; background: #fff; border-right: 1px solid #e3e8f0; z-index: 10; padding: 0; display: flex; flex-direction: column; }
+.sidebar .logo { font-size: 1.3em; font-weight: 700; color: #0a3871; padding: 32px 0 18px 32px; }
+.sidebar .role { color: #6b7a90; font-size: 1em; margin-left: 32px; margin-bottom: 18px; }
+.sidebar nav { flex: 1; }
+.sidebar nav a { display: flex; align-items: center; padding: 12px 32px; color: #1a3c6c; text-decoration: none; font-size: 1.08em; border-left: 4px solid transparent; transition: background 0.2s, border 0.2s; }
+.sidebar nav a.active, .sidebar nav a:hover { background: #f0f4ff; border-left: 4px solid #0a3871; color: #0a3871; }
+.sidebar .logout {
+    color: #e74c3c;
+    font-weight: 700;
+    margin: 24px 0 24px 32px;
+    text-decoration: none;
+}
+.topbar {
+    margin-left: 240px;
+    margin-top: 10px;
+    height: 64px;
+    background: #fff;
+    border-bottom: 1px solid #e3e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 32px;
+}
+.topbar .user { display: flex; align-items: center; gap: 12px; }
+.topbar .user .avatar { width: 38px; height: 38px; border-radius: 50%; background: #e3e8f0; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #0a3871; font-size: 1.1em; }
+.topbar .user .info { text-align: right; }
+.topbar .user .info .name { font-weight: 600; color: #1a3c6c; }
+.topbar .user .info .role { color: #6b7a90; font-size: 0.95em; }
+.main-content { margin-left: 240px; padding: 40px 40px 0 40px; }
+.stats-cards { display: flex; gap: 24px; margin-bottom: 32px; }
+.stats-card { flex: 1; background: #f6fafd; border-radius: 8px; padding: 18px 0; text-align: center; }
+.stats-card h2 { margin: 0; font-size: 2.2em; color: #1a3c6c; }
+.stats-card p { margin: 0; color: #6b7a90; font-size: 1.1em; }
+.user-search-row { display: flex; gap: 12px; margin-bottom: 18px; }
+.user-search-row input, .user-search-row select { padding: 8px 12px; border: 1px solid #cfd8e3; border-radius: 5px; font-size: 1em; }
+.user-search-row button { background: #0a3871; color: #fff; border: none; border-radius: 5px; padding: 8px 18px; font-size: 1em; cursor: pointer; }
+.user-directory { margin-top: 18px; }
+.user-directory table { width: 100%; border-collapse: collapse; }
+.user-directory th, .user-directory td { padding: 12px 10px; border-bottom: 1px solid #e3e8f0; text-align: left; }
+.user-directory th { background: #f6fafd; color: #1a3c6c; font-weight: 600; }
+.role-badge { display: inline-block; padding: 3px 12px; border-radius: 12px; font-size: 0.95em; font-weight: 500; }
+.role-badge.student { background: #f0f4ff; color: #1a3c6c; }
+.role-badge.instructor { background: #0a3871; color: #fff; }
+.role-badge.admin { background: #f10303; color: #ffffff; }
+.status-badge { display: inline-block; padding: 3px 12px; border-radius: 12px; font-size: 0.95em; font-weight: 500; }
+.status-badge.active { background: #e6f9ed; color: #1ca97c; }
+.status-badge.inactive { background: #fbeaea; color: #e74c3c; }
+.action-btn { background: none; border: none; cursor: pointer; margin-right: 8px; font-size: 1.1em; }
+.action-btn.edit { color: #0a3871; }
+.action-btn.email { color: #1ca97c; }
+.action-btn.delete { color: #e74c3c; }
+@media (max-width: 1100px) { .main-content { padding: 20px 5vw 0 5vw; } }
+@media (max-width: 900px) { .sidebar, .main-content, .topbar { margin-left: 0; width: 100%; } .sidebar { position: static; width: 100%; border-right: none; } .main-content { padding: 20px 2vw 0 2vw; } }
