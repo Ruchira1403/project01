@@ -1,0 +1,98 @@
+.signup-main-bg {
+  background: #e6f2f7;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.signup-container {
+  display: flex;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px #b3c6d6;
+  overflow: hidden;
+  max-width: 900px;
+  width: 100%;
+}
+.signup-form-col {
+  flex: 1.2;
+  padding: 48px 40px 40px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.signup-form-col h1 {
+  font-family: 'Merriweather', serif;
+  font-size: 2.3em;
+  color: #7a4200;
+  margin-bottom: 18px;
+  font-style: italic;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.signup-form-col h1 img {
+  width: 60px;
+  height: 60px;
+}
+.signup-form-col label {
+  font-size: 1.1em;
+  color: #4a3c1a;
+  margin-bottom: 4px;
+  margin-top: 12px;
+  display: block;
+}
+.signup-form-col input, .signup-form-col select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #cfd8e3;
+  border-radius: 7px;
+  font-size: 1.08em;
+  margin-bottom: 10px;
+  background: #f6fafd;
+}
+.signup-form-col button[type="submit"] {
+  width: 100%;
+  background: #7fd6ff;
+  color: #1a3c6c;
+  font-weight: 700;
+  font-size: 1.15em;
+  border: none;
+  border-radius: 7px;
+  padding: 13px 0;
+  margin-top: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.signup-form-col button[type="submit"]:hover {
+  background: #4fc3f7;
+}
+.signup-form-col .login-link {
+  text-align: center;
+  margin-top: 8px;
+  color: #6b7a90;
+}
+.signup-form-col .login-link a {
+  color: #1a3c6c;
+  text-decoration: underline;
+}
+.signup-img-col {
+  flex: 1;
+  background: #b3c6e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 260px;
+}
+.signup-img-col img {
+  width: 80%;
+  max-width: 260px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px #b3c6d6;
+}
+@media (max-width: 900px) {
+  .signup-container { flex-direction: column; }
+  .signup-img-col { min-height: 180px; }
+}
