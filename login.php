@@ -35,10 +35,10 @@ if (isset($_GET['error'])) {
       <?php endif; ?>
       <form action="includes/login.inc.php" method="post" class="login-form" autocomplete="off">
         <label for="username">Username</label>
-        <input type="text" id="username" name="username" required autocomplete="username">
+  <input type="text" id="username" name="username" required autocomplete="username" placeholder="Enter your username or email here">
 
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" required autocomplete="current-password">
+        <input type="password" id="password" name="password" required autocomplete="current-password" placeholder="Enter your password here">
 
         <label for="role">Select your Role</label>
         <select id="role" name="role" required>

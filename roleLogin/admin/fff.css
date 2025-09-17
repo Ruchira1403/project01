@@ -1,0 +1,175 @@
+/* notifications.css */
+
+/* ===== Page Layout ===== */
+.main-content {
+  margin-left: 400px; 
+  margin-right: 250px;
+  margin-top: 20px;
+  margin-bottom: 50px;/* adjust for sidebar */
+  padding: 24px;
+  background: #edeff1ca;
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+}
+
+/* ===== Header ===== */
+.notifications-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.notifications-header p {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+/* ===== Tabs ===== */
+.notifications-tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 20px;
+}
+
+.notifications-tabs button {
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  height: auto;
+  width:350px;
+  padding: 6px 18px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s;
+  border-bottom: 2px solid transparent;
+  margin: 0 2px;
+}
+
+.notifications-tabs button:hover {
+  color: #bcc1ca;
+}
+
+.notifications-tabs button.active {
+  color: #111827;
+  border-bottom: 2px solid #2563eb; /* blue accent */
+  background: #e0e7ff;
+  border-color: #2563eb;
+}
+
+/* ===== Form Container ===== */
+.notifications-form-container {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.notifications-form-container h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #1f2937;
+}
+
+/* ===== Form ===== */
+.modern-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modern-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.modern-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.modern-field label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.modern-input,
+.modern-input-icon-group select,
+.modern-input-icon-group textarea {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  background-color: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.modern-input:focus,
+.modern-input-icon-group select:focus,
+.modern-input-icon-group textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+  outline: none;
+}
+
+/* ===== Actions ===== */
+.modern-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.modern-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid transparent;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+/* Button Colors */
+.modern-btn.send {
+  background: #0a3871;
+  color: #fff;
+}
+
+.modern-btn.send:hover {
+  background: #0a3871;
+}
+
+.modern-btn.schedule {
+  background: #fff;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.modern-btn.schedule:hover {
+  background: #f3f4f6;
+}
+
+.modern-btn.draft {
+  background: #fff;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.modern-btn.draft:hover {
+  background: #f3f4f6;
+}
