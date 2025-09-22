@@ -53,7 +53,7 @@ if (isset($_GET['error'])) {
       </form>
 
       <div class="forgot">
-        <a href="#">Forgotten your username or password?</a>
+        <a href="forgot-password.html">Forgotten your username or password?</a>
       </div>
     </div>
 

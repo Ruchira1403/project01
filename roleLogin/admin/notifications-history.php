@@ -19,7 +19,7 @@ include_once 'topbar.php';
     <div class="notifications-tabs">
       <button onclick="window.location.href='notifications.php'">Compose</button>
       <button class="active">History</button>
-      <button>Analytics</button>
+      <button onclick="window.location.href='notifications-analytics.php'" >Analytics</button>
     </div>
     <?php
       // Get notification counts
@@ -68,16 +68,44 @@ include_once 'topbar.php';
               $priorityClass = strtolower($row['priority']);
               // Audience tag class
               $audienceClass = strtolower($row['audienceRole']);
-              echo '<tr>';
-              echo '<td><div>' . htmlspecialchars($row['title']) . '</div>';
-              echo '<div class="history-date">' . htmlspecialchars(date('Y-m-d', strtotime($row['sendDate']))) . '</div></td>';
-              echo '<td><span class="audience-tag ' . $audienceClass . '">' . htmlspecialchars(ucfirst($row['audienceRole'])) . '</span></td>';
-              echo '<td><span class="priority-tag ' . $priorityClass . '">' . htmlspecialchars(ucfirst($row['priority'])) . '</span></td>';
-              echo '<td><span class="status-tag ' . strtolower($status) . '">' . $statusIcon . ' ' . $status . '</span></td>';
-              echo '<td>-</td>'; // Recipients placeholder
-              echo '<td>-</td>'; // Views placeholder
-              echo '<td><span class="action-view">&#128065;</span> <span class="action-delete">&#128465;</span></td>';
-              echo '</tr>';
+        // Calculate recipients count
+   $audienceRoles = array_map('trim', explode(',', strtolower($row['audienceRole'])));
+$recipientsCount = 0;
+
+if (in_array('all', $audienceRoles)) {
+    // All users
+    $sql = "SELECT COUNT(*) as cnt FROM users";
+    $resultUsers = $conn->query($sql);
+    if ($resultUsers && $resultUsers->num_rows > 0) {
+        $recipientsCount = $resultUsers->fetch_assoc()['cnt'];
+    }
+} else {
+    // Specific roles
+    $placeholders = implode(',', array_fill(0, count($audienceRoles), '?'));
+    $stmt = $conn->prepare("SELECT COUNT(*) as cnt FROM users WHERE LOWER(usersRole) IN ($placeholders)");
+
+    // bind params dynamically
+    $types = str_repeat('s', count($audienceRoles));
+    $stmt->bind_param($types, ...$audienceRoles);
+
+    $stmt->execute();
+    $res = $stmt->get_result();
+    if ($res && $res->num_rows > 0) {
+        $recipientsCount = $res->fetch_assoc()['cnt'];
+    }
+    $stmt->close();
+}
+
+        echo '<tr>';
+        echo '<td><div>' . htmlspecialchars($row['title']) . '</div>';
+        echo '<div class="history-date">' . htmlspecialchars(date('Y-m-d', strtotime($row['sendDate']))) . '</div></td>';
+        echo '<td><span class="audience-tag ' . $audienceClass . '">' . htmlspecialchars(ucfirst($row['audienceRole'])) . '</span></td>';
+        echo '<td><span class="priority-tag ' . $priorityClass . '">' . htmlspecialchars(ucfirst($row['priority'])) . '</span></td>';
+        echo '<td><span class="status-tag ' . strtolower($status) . '">' . $statusIcon . ' ' . $status . '</span></td>';
+        echo '<td>' . $recipientsCount . '</td>';
+        echo '<td>' . (isset($row['views']) ? (int)$row['views'] : 0) . '</td>';
+        echo '<td><span class="action-view">&#128065;</span> <span class="action-delete">&#128465;</span></td>';
+        echo '</tr>';
             }
           } else {
             echo '<tr><td colspan="7">No notifications found.</td></tr>';

@@ -1,0 +1,75 @@
+/* Topbar styles for student panel */
+.topbar {
+  position: fixed;
+  left: 220px;
+  right: 0;
+  top: 30px;
+  height: 64px;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  border-bottom: 1px solid #e5e7eb;
+  z-index: 9;
+}
+.topbar-left {
+  display: flex;
+  flex-direction: column;
+}
+.page-title {
+  font-size: 1.35em;
+  font-weight: 700;
+  color: #2563eb;
+}
+.page-desc {
+  font-size: 1em;
+  color: #374151;
+}
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.notification-bell {
+  position: relative;
+  font-size: 1.5em;
+  color: #2563eb;
+}
+.notification-count {
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  background: #dc2626;
+  color: #fff;
+  font-size: 0.9em;
+  font-weight: 700;
+  border-radius: 50%;
+  padding: 2px 7px;
+}
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.user-avatar {
+  background: #2563eb;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em;
+}
+.user-name {
+  font-weight: 800;
+  color: #374151;
+  font-size: large;
+}
+.user-role {
+  font-size: 0.95em;
+  color: #6b7280;
+}

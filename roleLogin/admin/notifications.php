@@ -81,9 +81,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <span style="color: red; font-size: 12px;">*</span>
             <div class="modern-input-icon-group audience-dropdown-wrapper">
               <select id="audience-dropdown" name="audience[]" class="audience-dropdown" multiple>
-                <option value="students">Students</option>
-                <option value="admins">Admins</option>
-                <option value="instructors">Instructors</option>
+                <option value="student">Students</option>
+                <option value="admin">Admins</option>
+                <option value="instructor">Instructors</option>
               </select>
             </div>
           </div>
