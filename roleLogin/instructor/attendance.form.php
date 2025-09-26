@@ -20,25 +20,21 @@ $batchRes = $conn->query("SELECT DISTINCT batch FROM users WHERE usersRole = 'st
     <input type="hidden" name="batch" id="selected-batch">
     <label for="attendance-date">Attendance Date:</label>
     <input type="date" name="attendanceDate" id="attendance-date" required value="<?php echo date('Y-m-d'); ?>">
+    <label for="session-topic">Topic:</label>
+    <input type="text" name="topic" id="session-topic" placeholder="e.g., Topographic Survey Field Work" required>
+    <label for="session-location">Location:</label>
+    <input type="text" name="locationGlobal" id="session-location" placeholder="e.g., North Campus Field" required>
+    <div style="display:flex; gap:12px; align-items:center; margin:10px 0;">
+      <div>
+        <label for="start-time">Start Time:</label>
+        <input type="time" name="startTimeGlobal" id="start-time" required>
+      </div>
+      <div>
+        <label for="end-time">End Time:</label>
+        <input type="time" name="endTimeGlobal" id="end-time" required>
+      </div>
+    </div>
     <div id="students-list"></div>
     <button type="submit">Save Attendance</button>
   </form>
 </div>
-<script>
-function loadStudents() {
-  var batch = document.getElementById('batch-select').value;
-  if (!batch) return;
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'attendance.students.php', true);
-  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      document.getElementById('attendanceBatchForm').style.display = 'none';
-      document.getElementById('attendanceStudentForm').style.display = 'block';
-      document.getElementById('selected-batch').value = batch;
-      document.getElementById('students-list').innerHTML = xhr.responseText;
-    }
-  };
-  xhr.send('batch=' + encodeURIComponent(batch));
-}
-</script>

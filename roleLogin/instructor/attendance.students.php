@@ -3,7 +3,7 @@ session_start();
 include_once '../../includes/dbh.inc.php';
 if (isset($_POST['batch'])) {
   $batch = $conn->real_escape_string($_POST['batch']);
-  $students = $conn->query("SELECT usersUid FROM users WHERE batch = '$batch' AND userRole = 'student'");
+  $students = $conn->query("SELECT usersUid FROM users WHERE batch = '$batch' AND usersRole = 'student'");
   if ($students && $students->num_rows > 0) {
     echo '<table class="students-table"><tr><th>Student UID</th><th>Status</th></tr>';
     while ($row = $students->fetch_assoc()) {
