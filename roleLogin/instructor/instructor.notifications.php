@@ -12,51 +12,67 @@ include '../../includes/dbh.inc.php';
     <h1>Notifications</h1>
     <p>Stay updated with important announcements and reminders.</p>
     <?php
-    // Total notifications for students
-  $totalResult = $conn->query("SELECT COUNT(*) as total FROM notifications WHERE FIND_IN_SET('student', audienceRole) AND sendDate <= NOW()");
+    // Total notifications for instructors
+  $totalResult = $conn->query("SELECT COUNT(*) as total FROM notifications WHERE FIND_IN_SET('instructor', audienceRole) AND sendDate <= NOW()");
   $totalCount = ($totalResult && $totalResult->num_rows > 0) ? $totalResult->fetch_assoc()['total'] : 0;
   // Unread: not viewed by this user
   $userId = $_SESSION['userid'] ?? 0;
-  $unreadResult = $conn->query("SELECT COUNT(*) as unread FROM notifications n WHERE FIND_IN_SET('student', n.audienceRole) AND sendDate <= NOW() AND NOT EXISTS (SELECT 1 FROM notification_views v WHERE v.notificationId = n.notificationId AND v.userId = $userId)");
+  $unreadResult = $conn->query("SELECT COUNT(*) as unread FROM notifications n WHERE FIND_IN_SET('instructor', n.audienceRole) AND sendDate <= NOW() AND NOT EXISTS (SELECT 1 FROM notification_views v WHERE v.notificationId = n.notificationId AND v.userId = $userId)");
   $unreadCount = ($unreadResult && $unreadResult->num_rows > 0) ? $unreadResult->fetch_assoc()['unread'] : 0;
   // High Priority
-  $highPriorityResult = $conn->query("SELECT COUNT(*) as highpriority FROM notifications WHERE FIND_IN_SET('student', audienceRole) AND priority = 'urgent' AND sendDate <= NOW()");
+  $highPriorityResult = $conn->query("SELECT COUNT(*) as highpriority FROM notifications WHERE FIND_IN_SET('instructor', audienceRole) AND priority = 'urgent' AND sendDate <= NOW()");
   $highPriorityCount = ($highPriorityResult && $highPriorityResult->num_rows > 0) ? $highPriorityResult->fetch_assoc()['highpriority'] : 0;
   // Today
   $today = date('Y-m-d');
-  $todayResult = $conn->query("SELECT COUNT(*) as today FROM notifications WHERE FIND_IN_SET('student', audienceRole) AND DATE(sendDate) = '$today' AND sendDate <= NOW()");
+  $todayResult = $conn->query("SELECT COUNT(*) as today FROM notifications WHERE FIND_IN_SET('instructor', audienceRole) AND DATE(sendDate) = '$today' AND sendDate <= NOW()");
   $todayCount = ($todayResult && $todayResult->num_rows > 0) ? $todayResult->fetch_assoc()['today'] : 0;
+    
     ?>
-    <div class="notifications-summary-row">
-      <div class="notifications-summary-box">
-        <div class="summary-title">Total</div>
-        <div class="summary-value"><?php echo $totalCount; ?></div>
-        <div class="summary-desc">All notifications</div>
+    <div class="notifications-stats">
+      <div class="stat-card">
+        <div class="stat-icon">📊</div>
+        <div class="stat-content">
+          <div class="stat-number"><?php echo $totalCount; ?></div>
+          <div class="stat-label">Total</div>
+        </div>
       </div>
-      <div class="notifications-summary-box">
-        <div class="summary-title">Unread</div>
-        <div class="summary-value" style="color:#f59e42;"><?php echo $unreadCount; ?></div>
-        <div class="summary-desc">Need attention</div>
+      <div class="stat-card">
+        <div class="stat-icon">🔔</div>
+        <div class="stat-content">
+          <div class="stat-number"><?php echo $unreadCount; ?></div>
+          <div class="stat-label">Unread</div>
+        </div>
       </div>
-      <div class="notifications-summary-box">
-        <div class="summary-title">High Priority</div>
-        <div class="summary-value" style="color:#dc2626;"><?php echo $highPriorityCount; ?></div>
-        <div class="summary-desc">Urgent items</div>
+      <div class="stat-card">
+        <div class="stat-icon">⚠️</div>
+        <div class="stat-content">
+          <div class="stat-number"><?php echo $highPriorityCount; ?></div>
+          <div class="stat-label">Urgent</div>
+        </div>
       </div>
-      <div class="notifications-summary-box">
-        <div class="summary-title">Today</div>
-        <div class="summary-value" style="color:#2563eb;"><?php echo $todayCount; ?></div>
-        <div class="summary-desc">Recent updates</div>
+      <div class="stat-card">
+        <div class="stat-icon">📅</div>
+        <div class="stat-content">
+          <div class="stat-number"><?php echo $todayCount; ?></div>
+          <div class="stat-label">Today</div>
+        </div>
       </div>
     </div>
-    <form method="get" class="notifications-search-row" style="display:flex; gap:12px;">
-      <input type="text" name="search" class="notifications-search" placeholder="Search notifications..." value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
-      <select name="filter" class="notifications-filter">
-        <option value="all" <?php if(($_GET['filter'] ?? '')=='all') echo 'selected'; ?>>All</option>
-        <option value="unread" <?php if(($_GET['filter'] ?? '')=='unread') echo 'selected'; ?>>Unread</option>
-        <option value="high" <?php if(($_GET['filter'] ?? '')=='high') echo 'selected'; ?>>High Priority</option>
-      </select>
-      <button type="submit" class="notifications-filter-btn">&#128269;</button>
+    
+    <form class="notifications-filters" method="get">
+      <div class="filter-group">
+        <label for="filter">Filter:</label>
+        <select name="filter" id="filter">
+          <option value="all" <?php echo ($_GET['filter'] ?? '') === 'all' ? 'selected' : ''; ?>>All</option>
+          <option value="unread" <?php echo ($_GET['filter'] ?? '') === 'unread' ? 'selected' : ''; ?>>Unread</option>
+          <option value="high" <?php echo ($_GET['filter'] ?? '') === 'high' ? 'selected' : ''; ?>>High Priority</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="search">Search:</label>
+        <input type="text" name="search" id="search" placeholder="Search notifications..." value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
+      </div>
+      <button type="submit">Filter</button>
     </form>
   </div>
   <div class="notifications-feed">
@@ -65,7 +81,7 @@ include '../../includes/dbh.inc.php';
   // Filtering logic
   $filter = $_GET['filter'] ?? 'all';
   $search = trim($_GET['search'] ?? '');
-  $where = "FIND_IN_SET('student', audienceRole) AND sendDate <= NOW()";
+  $where = "FIND_IN_SET('instructor', audienceRole) AND sendDate <= NOW()";
   if ($filter === 'unread' && $userId) {
     $where .= " AND NOT EXISTS (SELECT 1 FROM notification_views v WHERE v.notificationId = notifications.notificationId AND v.userId = $userId)";
   } elseif ($filter === 'high') {
@@ -106,7 +122,7 @@ include '../../includes/dbh.inc.php';
     ?>
     <!-- Modal for message -->
     <div id="message-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.3); justify-content:center; align-items:center; z-index:9999;">
-      <div style="background:#fff; padding:24px 18px; border-radius:8px; min-width:260px; box-shadow:0 2px 8px #0002; text-align:left; max-width:400px;">
+      <div style="background:white; padding:24px; border-radius:8px; max-width:500px; width:90%; box-shadow:0 4px 20px rgba(0,0,0,0.15);">
         <h3 id="modal-title" style="margin-bottom:12px; font-size:18px; color:#2563eb;"></h3>
         <div id="modal-priority" style="margin-bottom:8px; font-size:14px; color:#374151;"></div>
         <div id="modal-date" style="margin-bottom:12px; font-size:13px; color:#6b7280;"></div>
@@ -182,4 +198,3 @@ function closeMessageModal() {
 }
 </script>
 </div>
-
