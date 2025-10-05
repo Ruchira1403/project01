@@ -43,13 +43,4 @@ nav a.active, nav a:hover {
   background: #1e40af;
   border-left: 4px solid #60b3e6;
 }
-.logout {
-  color: #fff;
-  text-decoration: none;
-  padding: 12px 32px;
-  font-size: 1.08em;
-  margin-top: 24px;
-  border-top: 1px solid #3b82f6;
-  width: 100%;
-  display: block;
-}
+
