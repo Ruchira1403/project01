@@ -12,11 +12,29 @@
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required autocomplete="email">
                 <label for="role">Select your Role</label>
-                <select id="role" name="role" required>
+                <select id="role" name="role" required onchange="toggleBatchField()">
                     <option value="student">Student</option>
                     <option value="instructor">Instructor</option>
                     <option value="admin">Admin</option>
                 </select>
+                <div id="batch-field" style="display:block;">
+                    <label for="batch">Batch</label>
+                    <input type="text" id="batch" name="batch" autocomplete="off" placeholder="e.g. 2021/2022">
+                </div>
+                <script>
+                function toggleBatchField() {
+                    var role = document.getElementById('role').value;
+                    var batchDiv = document.getElementById('batch-field');
+                    if (role === 'student') {
+                        batchDiv.style.display = 'block';
+                        document.getElementById('batch').required = true;
+                    } else {
+                        batchDiv.style.display = 'none';
+                        document.getElementById('batch').required = false;
+                    }
+                }
+                window.onload = toggleBatchField;
+                </script>
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required autocomplete="new-password">
                 <label for="passwordRepeat">Re Enter Password</label>
