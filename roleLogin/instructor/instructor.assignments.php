@@ -10,9 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $topic = $_POST['topic'];
   $description = $_POST['description'];
   $batch = $_POST['batch'];
-  $sql = "INSERT INTO assignments (instructorId, semester, topic, description, batch) VALUES (?, ?, ?, ?, ?)";
+  $dueDate = $_POST['dueDate'];
+  $sql = "INSERT INTO assignments (instructorId, semester, topic, description, batch, dueDate) VALUES (?, ?, ?, ?, ?, ?)";
   $stmt = $conn->prepare($sql);
-  $stmt->bind_param("iisss", $instructorId, $semester, $topic, $description, $batch);
+  $stmt->bind_param("iissss", $instructorId, $semester, $topic, $description, $batch, $dueDate);
   $stmt->execute();
   $stmt->close();
   echo "<div style='color:green; margin:16px;'>Assignment created successfully!</div>";
@@ -41,6 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <input type="text" name="topic" id="topic" required placeholder="Assignment Topic">
       <label for="description">Description</label>
       <textarea name="description" id="description" placeholder="Description"></textarea>
+      <label for="dueDate">Due Date</label>
+      <input type="date" name="dueDate" id="dueDate" required>
       <button type="submit" class="submission-btn" style="margin-top:12px;">Create Assignment</button>
     </form>
   </div>

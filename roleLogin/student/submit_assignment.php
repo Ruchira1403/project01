@@ -45,7 +45,7 @@ if (isset($_FILES['submissionFile']) && $_FILES['submissionFile']['error'] === U
     $targetFile = $targetDir . $uniqueFileName;
     
     if (move_uploaded_file($fileTmpName, $targetFile)) {
-        $sql = "INSERT INTO submissions (assignmentId, studentId, filePath) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO submissions (assignmentId, studentId, filePath, submittedAt) VALUES (?, ?, ?, NOW())";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("iis", $assignmentId, $studentId, $uniqueFileName);
         $stmt->execute();

@@ -2,87 +2,199 @@
 session_start();
 require_once 'topbar.php';
 require_once 'sidebar.php';
+require_once '../../includes/dbh.inc.php';
+
+// Get instructor ID from session
+$instructorId = $_SESSION['userid'];
+
+// Get dashboard statistics
+$stats = [];
+
+// Total Students
+$totalStudentsQuery = "SELECT COUNT(*) as count FROM users WHERE usersRole = 'student'";
+$totalStudentsResult = $conn->query($totalStudentsQuery);
+$stats['totalStudents'] = $totalStudentsResult ? $totalStudentsResult->fetch_assoc()['count'] : 0;
+
+// Submissions this week
+$submissionsQuery = "SELECT COUNT(*) as count FROM submissions WHERE WEEK(submittedAt) = WEEK(CURDATE()) AND YEAR(submittedAt) = YEAR(CURDATE())";
+$submissionsResult = $conn->query($submissionsQuery);
+$stats['submissions'] = $submissionsResult ? $submissionsResult->fetch_assoc()['count'] : 0;
+
+// Pending Reviews
+$pendingQuery = "SELECT COUNT(*) as count FROM submissions WHERE gradedBy IS NULL";
+$pendingResult = $conn->query($pendingQuery);
+$stats['pendingReviews'] = $pendingResult ? $pendingResult->fetch_assoc()['count'] : 0;
+
+// Average Grade
+$avgGradeQuery = "SELECT AVG(grade) as avg_grade FROM submissions WHERE grade IS NOT NULL";
+$avgGradeResult = $conn->query($avgGradeQuery);
+$stats['avgGrade'] = $avgGradeResult ? round($avgGradeResult->fetch_assoc()['avg_grade'], 1) : 0;
+
+// Get recent submissions
+$recentSubmissionsQuery = "SELECT s.*, u.firstName, u.lastName, a.title as assignment_title 
+                          FROM submissions s 
+                          JOIN users u ON s.studentId = u.usersId 
+                          JOIN assignments a ON s.assignmentId = a.assignmentId 
+                          ORDER BY s.submittedAt DESC 
+                          LIMIT 3";
+$recentSubmissionsResult = $conn->query($recentSubmissionsQuery);
+$recentSubmissions = [];
+if ($recentSubmissionsResult) {
+    while ($row = $recentSubmissionsResult->fetch_assoc()) {
+        $recentSubmissions[] = $row;
+    }
+}
+
+// Get upcoming classes (if you have a classes/schedule table)
+$upcomingClassesQuery = "SELECT * FROM classes WHERE class_date >= CURDATE() ORDER BY class_date ASC LIMIT 2";
+$upcomingClassesResult = $conn->query($upcomingClassesQuery);
+$upcomingClasses = [];
+if ($upcomingClassesResult) {
+    while ($row = $upcomingClassesResult->fetch_assoc()) {
+        $upcomingClasses[] = $row;
+    }
+}
 ?>
-<link rel="stylesheet" href="instructor.home.css">
+<link rel="stylesheet" href="instructor.dashbord.css">
 <div class="main-content">
     <div class="dashboard-header">
-        <h1>Student Management</h1>
-        <p>Monitor and manage your students' progress and performance.</p>
-        <div class="dashboard-metrics-row">
-            <div class="dashboard-metric">
-                <div class="metric-title">Total Students</div>
-                <div class="metric-value">5</div>
-                <div class="metric-desc">Enrolled in course</div>
-            </div>
-            <div class="dashboard-metric">
-                <div class="metric-title">Average GPA</div>
-                <div class="metric-value">3.5</div>
-                <div class="metric-desc">Class performance</div>
-            </div>
-            <div class="dashboard-metric">
-                <div class="metric-title">Avg Attendance</div>
-                <div class="metric-value" style="color:#059669;">84%</div>
-                <div class="metric-desc">Class attendance</div>
-            </div>
-            <div class="dashboard-metric">
-                <div class="metric-title">At Risk</div>
-                <div class="metric-value" style="color:#dc2626;">1</div>
-                <div class="metric-desc">Need attention</div>
-            </div>
+        <h1>Instructor Dashboard</h1>
+        <p>Manage your classes and student progress.</p>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="summary-cards">
+        <div class="summary-card">
+            <div class="card-title">Total Students</div>
+            <div class="card-value"><?php echo $stats['totalStudents']; ?></div>
+            <div class="card-desc">Active students</div>
         </div>
-        <div class="dashboard-search-row">
-            <input type="text" class="dashboard-search" placeholder="Search students by name, email, or ID...">
-            <button class="dashboard-export-btn">Export List</button>
+        <div class="summary-card">
+            <div class="card-title">Submissions</div>
+            <div class="card-value"><?php echo $stats['submissions']; ?></div>
+            <div class="card-desc">This week</div>
+        </div>
+        <div class="summary-card">
+            <div class="card-title">Pending Reviews</div>
+            <div class="card-value"><?php echo $stats['pendingReviews']; ?></div>
+            <div class="card-desc">Need attention</div>
+        </div>
+        <div class="summary-card">
+            <div class="card-title">Average Grade</div>
+            <div class="card-value"><?php echo $stats['avgGrade']; ?>%</div>
+            <div class="card-desc">Class performance</div>
         </div>
     </div>
-    <div class="student-roster">
-        <h2 class="roster-title">&#128101; Student Roster</h2>
-        <table class="roster-table">
-            <thead>
-                <tr>
-                    <th>Student</th>
-                    <th>Contact</th>
-                    <th>Academic Info</th>
-                    <th>Progress</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><div class="roster-avatar">JD</div> John Doe<br><span class="roster-id">GEO2024001</span></td>
-                    <td>john.doe@university.edu<br><span class="roster-phone">+1 (555) 123-4567</span></td>
-                    <td>3rd Year<br>GPA: 3.8</td>
-                    <td>Assignments: 10/12<br>Attendance: 92%</td>
-                    <td><span class="roster-status active">Active</span></td>
-                    <td><button class="roster-action">&#128196;</button> <button class="roster-action">&#128101;</button></td>
-                </tr>
-                <tr>
-                    <td><div class="roster-avatar">JS</div> Jane Smith<br><span class="roster-id">GEO2024002</span></td>
-                    <td>jane.smith@university.edu<br><span class="roster-phone">+1 (555) 234-5678</span></td>
-                    <td>3rd Year<br>GPA: 3.9</td>
-                    <td>Assignments: 12/12<br>Attendance: 95%</td>
-                    <td><span class="roster-status active">Active</span></td>
-                    <td><button class="roster-action">&#128196;</button> <button class="roster-action">&#128101;</button></td>
-                </tr>
-                <tr>
-                    <td><div class="roster-avatar">MJ</div> Mike Johnson<br><span class="roster-id">GEO2024003</span></td>
-                    <td>mike.johnson@university.edu<br><span class="roster-phone">+1 (555) 345-6789</span></td>
-                    <td>3rd Year<br>GPA: 3.2</td>
-                    <td>Assignments: 8/12<br>Attendance: 78%</td>
-                    <td><span class="roster-status warning">Warning</span></td>
-                    <td><button class="roster-action">&#128196;</button> <button class="roster-action">&#128101;</button></td>
-                </tr>
-                <tr>
-                    <td><div class="roster-avatar">SW</div> Sarah Wilson<br><span class="roster-id">GEO2024004</span></td>
-                    <td>sarah.wilson@university.edu<br><span class="roster-phone">+1 (555) 456-7890</span></td>
-                    <td>3rd Year<br>GPA: 3.7</td>
-                    <td>Assignments: 11/12<br>Attendance: 91%</td>
-                    <td><span class="roster-status active">Active</span></td>
-                    <td><button class="roster-action">&#128196;</button> <button class="roster-action">&#128101;</button></td>
-                </tr>
-            </tbody>
-        </table>
+
+    <!-- Main Content Grid -->
+    <div class="dashboard-grid">
+        <!-- Recent Submissions Section -->
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h3>📅 Recent Submissions</h3>
+            </div>
+            <div class="submissions-list">
+                <?php if (!empty($recentSubmissions)): ?>
+                    <?php foreach ($recentSubmissions as $submission): ?>
+                        <div class="submission-item">
+                            <div class="submission-info">
+                                <div class="student-name"><?php echo htmlspecialchars($submission['firstName'] . ' ' . $submission['lastName']); ?></div>
+                                <div class="assignment-title"><?php echo htmlspecialchars($submission['assignment_title']); ?></div>
+                                <div class="submission-date">Submitted: <?php echo date('Y-m-d H:i', strtotime($submission['submission_date'])); ?></div>
+                            </div>
+                            <div class="submission-status <?php echo $submission['status'] == 'pending' ? 'pending' : 'reviewed'; ?>">
+                                <?php 
+                                if ($submission['status'] == 'pending') {
+                                    echo 'Pending Review';
+                                } else {
+                                    echo 'Reviewed';
+                                    if ($submission['grade']) {
+                                        echo ' • Grade: ' . $submission['grade'];
+                                    }
+                                }
+                                ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="submission-item">
+                        <div class="submission-info">
+                            <div class="student-name">No recent submissions</div>
+                            <div class="assignment-title">No assignments submitted yet</div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </div>
+            <button class="section-button" onclick="window.location.href='instructor.submissions.php'">Review All Submissions</button>
+        </div>
+
+        <!-- Upcoming Classes Section -->
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h3>📅 Upcoming Classes</h3>
+            </div>
+            <div class="classes-list">
+                <?php if (!empty($upcomingClasses)): ?>
+                    <?php foreach ($upcomingClasses as $class): ?>
+                        <div class="class-item">
+                            <div class="class-info">
+                                <div class="class-title"><?php echo htmlspecialchars($class['title'] ?? $class['class_name'] ?? 'Class'); ?></div>
+                                <div class="class-topic"><?php echo htmlspecialchars($class['description'] ?? $class['topic'] ?? 'Class Description'); ?></div>
+                                <div class="class-time-location">
+                                    <?php 
+                                    $classDate = date('H:i A', strtotime($class['class_date'] ?? $class['start_time'] ?? '09:00:00'));
+                                    $location = $class['location'] ?? 'Classroom';
+                                    echo $classDate . ' • ' . $location;
+                                    ?>
+                                </div>
+                            </div>
+                            <div class="class-tag <?php 
+                                $classDate = $class['class_date'] ?? $class['date'] ?? date('Y-m-d');
+                                $today = date('Y-m-d');
+                                $tomorrow = date('Y-m-d', strtotime('+1 day'));
+                                
+                                if ($classDate == $today) {
+                                    echo 'today';
+                                } elseif ($classDate == $tomorrow) {
+                                    echo 'tomorrow';
+                                } else {
+                                    echo 'upcoming';
+                                }
+                            ?>">
+                                <?php 
+                                $classDate = $class['class_date'] ?? $class['date'] ?? date('Y-m-d');
+                                $today = date('Y-m-d');
+                                $tomorrow = date('Y-m-d', strtotime('+1 day'));
+                                
+                                if ($classDate == $today) {
+                                    echo 'Today';
+                                } elseif ($classDate == $tomorrow) {
+                                    echo 'Tomorrow';
+                                } else {
+                                    echo date('M j', strtotime($classDate));
+                                }
+                                ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="class-item">
+                        <div class="class-info">
+                            <div class="class-title">No upcoming classes</div>
+                            <div class="class-topic">No classes scheduled</div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </div>
+            <button class="section-button" onclick="window.location.href='instructor.assignments.php'">View Full Schedule</button>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+        <button class="action-btn" onclick="window.location.href='instructor.submissions.php'">Grade Submissions</button>
+        <button class="action-btn" onclick="window.location.href='instructor.attendance.php'">Take Attendance</button>
+        <button class="action-btn" onclick="window.location.href='instructor.field_tasks.php'">Upload Resources</button>
     </div>
 </div>
 

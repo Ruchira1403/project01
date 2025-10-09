@@ -65,17 +65,21 @@ nav a.active, nav a:hover {
 }
 </style>
 
+<?php
+// Get current page name for active highlighting
+$currentPage = basename($_SERVER['PHP_SELF']);
+?>
 <div class="sidebar">
     <div class="logo">GeoSurvey</div>
     <div class="role">Instructor</div>
     <nav>
-        <a href="instructor.home.php" class="active">&#127968; Dashboard</a>
-        <a href="instructor.attendance.php">&#128101; attendence</a>
-        <a href="instructor.submissions.php">&#128196; Submissions</a>
-        <a href="instructor.assignments.php">&#128197; Schedule</a>
-        <a href="instructor.field_tasks.php">&#128218; Field Tasks</a>
-        <a href="instructor.viva_sessions.php">&#128203; Viva Sessions</a>
-        <a href="instructor.notifications.php">&#128276; Notifications</a>
+        <a href="instructor.home.php" class="<?php echo ($currentPage == 'instructor.home.php') ? 'active' : ''; ?>">&#127968; Dashboard</a>
+        <a href="instructor.attendance.php" class="<?php echo ($currentPage == 'instructor.attendance.php') ? 'active' : ''; ?>">&#128101; Students</a>
+        <a href="instructor.submissions.php" class="<?php echo ($currentPage == 'instructor.submissions.php') ? 'active' : ''; ?>">&#128196; Submissions</a>
+        <a href="instructor.assignments.php" class="<?php echo ($currentPage == 'instructor.assignments.php') ? 'active' : ''; ?>">&#128197; Schedule assignments</a>
+        <a href="instructor.field_tasks.php" class="<?php echo ($currentPage == 'instructor.field_tasks.php') ? 'active' : ''; ?>">&#128218; Resources</a>
+        <a href="instructor.viva_sessions.php" class="<?php echo ($currentPage == 'instructor.viva_sessions.php') ? 'active' : ''; ?>">&#128203; Viva Sessions</a>
+        <a href="instructor.notifications.php" class="<?php echo ($currentPage == 'instructor.notifications.php') ? 'active' : ''; ?>">&#128276; Feedback</a>
     </nav>
     <a href="../../login.php" class="logout">&#8592; Logout</a>
 </div>
