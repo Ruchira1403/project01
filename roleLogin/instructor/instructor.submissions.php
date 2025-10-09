@@ -4,7 +4,13 @@ include_once '../../includes/dbh.inc.php';
 include_once 'sidebar.php';
 include_once 'topbar.php';
 ?>
-<link rel="stylesheet" href="instructor.home.css">
+<link rel="stylesheet" href="instructor.dashbord.css">
+<style>
+.main-content {
+    margin-left: 250px !important;
+    margin-right: 50px !important;
+}
+</style>
 
 <div class="main-content">
     <div class="dashboard-header">

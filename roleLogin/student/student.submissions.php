@@ -4,7 +4,7 @@ include_once 'sidebar.php';
 include_once 'topbar.php';
 include_once '../../includes/dbh.inc.php';
 ?>
-<link rel="stylesheet" href="student.submissions.css">
+<link rel="stylesheet" href="students.submissions.css">
 <div class="main-content">
   <div class="submissions-header">
     <h1>Submissions</h1>
@@ -55,14 +55,40 @@ include_once '../../includes/dbh.inc.php';
           $assignmentId = $row['assignmentId'];
           $topic = htmlspecialchars($row['topic']);
           $desc = htmlspecialchars($row['description']);
+          $dueDate = $row['dueDate'];
 
           // Check if already submitted by this student
           $subRes = $conn->query("SELECT * FROM submissions WHERE assignmentId = $assignmentId AND studentId = $studentId");
           $submitted = ($subRes && $subRes->num_rows > 0);
+          
+          // Check if assignment is overdue
+          $isOverdue = false;
+          $overdueText = '';
+          if ($dueDate) {
+            $dueTimestamp = strtotime($dueDate);
+            $currentTimestamp = time();
+            if ($currentTimestamp > $dueTimestamp) {
+              $isOverdue = true;
+              $daysLate = floor(($currentTimestamp - $dueTimestamp) / (24 * 60 * 60));
+              $overdueText = " (Overdue by $daysLate day" . ($daysLate > 1 ? 's' : '') . ")";
+            }
+          }
 
           echo "<div class='assignment'>";
           echo "<h4>$topic</h4>";
           echo "<p>$desc</p>";
+          
+          // Display due date and overdue status
+          if ($dueDate) {
+            $dueDateFormatted = date('M j, Y', strtotime($dueDate));
+            $dueDateColor = $isOverdue ? '#ef4444' : '#6b7280';
+            echo "<div style='margin-bottom: 12px; padding: 8px; background: " . ($isOverdue ? '#fef2f2' : '#f9fafb') . "; border: 1px solid " . ($isOverdue ? '#fecaca' : '#e5e7eb') . "; border-radius: 6px;'>";
+            echo "<span style='font-weight: bold; color: $dueDateColor;'>📅 Due Date: $dueDateFormatted</span>";
+            if ($isOverdue) {
+              echo "<span style='color: #ef4444; font-weight: bold; margin-left: 8px;'>⚠️ OVERDUE$overdueText</span>";
+            }
+            echo "</div>";
+          }
           if ($submitted) {
             $subRow = $subRes->fetch_assoc();
             // Only show the link to the student who submitted
@@ -72,8 +98,23 @@ include_once '../../includes/dbh.inc.php';
                 $fileIcon = ($fileExtension === 'pdf') ? '📄' : '📐';
                 $fileTypeText = ($fileExtension === 'pdf') ? 'PDF' : 'DWG';
                 
+                // Check if submission was late
+                $submissionLate = false;
+                $lateSubmissionText = '';
+                if ($dueDate && $subRow['submittedAt']) {
+                  $submissionTimestamp = strtotime($subRow['submittedAt']);
+                  $dueTimestamp = strtotime($dueDate);
+                  if ($submissionTimestamp > $dueTimestamp) {
+                    $submissionLate = true;
+                    $daysLate = floor(($submissionTimestamp - $dueTimestamp) / (24 * 60 * 60));
+                    $lateSubmissionText = " (Late by $daysLate day" . ($daysLate > 1 ? 's' : '') . ")";
+                  }
+                }
+                
                 echo "<div style='margin-bottom:12px;'>";
-                echo "<span style='color:green; font-weight:bold;'>✓ Already submitted</span> ";
+                $submissionStatusColor = $submissionLate ? '#f59e42' : '#059669';
+                $submissionStatusText = $submissionLate ? '✓ Submitted Late' : '✓ Already submitted';
+                echo "<span style='color:$submissionStatusColor; font-weight:bold;'>$submissionStatusText$lateSubmissionText</span> ";
                 echo "<a href='../uploads/{$subRow['filePath']}' target='_blank' style='color:#2563eb; text-decoration:none; margin-left:8px;'>";
                 echo $fileIcon . " View " . $fileTypeText . "</a>";
                 echo "</div>";

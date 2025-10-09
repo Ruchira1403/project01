@@ -16,8 +16,6 @@ include_once '../../includes/dbh.inc.php';
     <div style="margin-bottom: 20px;">
         <div style="display: flex; gap: 8px; border-bottom: 1px solid #e5e7eb;">
             <button id="listViewBtn" onclick="switchView('list')" style="padding: 8px 16px; border: none; background: #2563eb; color: white; border-radius: 4px 4px 0 0; cursor: pointer;">List View</button>
-            <button id="calendarViewBtn" onclick="switchView('calendar')" style="padding: 8px 16px; border: none; background: #f3f4f6; color: #374151; border-radius: 4px 4px 0 0; cursor: pointer;">Calendar View</button>
-            <button id="mapViewBtn" onclick="switchView('map')" style="padding: 8px 16px; border: none; background: #f3f4f6; color: #374151; border-radius: 4px 4px 0 0; cursor: pointer;">Map View</button>
         </div>
     </div>
 
@@ -121,29 +119,10 @@ include_once '../../includes/dbh.inc.php';
         ?>
     </div>
 
-    <!-- Calendar View -->
-    <div id="calendarView" class="view-content" style="display: none;">
-        <div style="text-align: center; padding: 40px; color: #6b7280;">
-            <h3>Calendar View</h3>
-            <p>Calendar view will be implemented here.</p>
-        </div>
-    </div>
-
-    <!-- Map View -->
-    <div id="mapView" class="view-content" style="display: none;">
-        <div style="text-align: center; padding: 40px; color: #6b7280;">
-            <h3>Map View</h3>
-            <p>Map view will be implemented here.</p>
-        </div>
-    </div>
-</div>
-
 <script>
 function switchView(view) {
     // Hide all views
     document.getElementById('listView').style.display = 'none';
-    document.getElementById('calendarView').style.display = 'none';
-    document.getElementById('mapView').style.display = 'none';
     
     // Reset button styles
     document.getElementById('listViewBtn').style.background = '#f3f4f6';

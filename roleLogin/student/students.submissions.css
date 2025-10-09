@@ -1,0 +1,142 @@
+.main-content {
+  padding: 32px 24px;
+  margin-left: 250px;
+  margin-top: 150px;
+}
+.submissions-header {
+  background: #e0e7ef;
+  border-radius: 12px;
+  padding: 32px 24px 24px 24px;
+  margin-bottom: 24px;
+}
+.submissions-header h1 {
+  font-size: 2em;
+  margin-bottom: 6px;
+  color: #2563eb;
+}
+.submissions-header p {
+  color: #64748b;
+  margin-bottom: 18px;
+  font-size: 1.1em;
+}
+.submissions-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.submission-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px #0001;
+  padding: 24px 18px;
+  min-width: 260px;
+  max-width: 320px;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.submission-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 8px;
+}
+.submission-desc {
+  color: #374151;
+  margin-bottom: 18px;
+}
+.submission-btn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.submission-btn:hover {
+  background: #1d4ed8;
+}
+
+/* Blue Semester Panel Buttons */
+.semester-panel {
+  margin-bottom: 12px;
+}
+
+.panel-toggle {
+  background: #2563eb !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+  width: 100% !important;
+  text-align: left !important;
+  cursor: pointer !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2) !important;
+}
+
+.panel-toggle:hover {
+  background: #1d4ed8 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3) !important;
+}
+
+.panel-arrow {
+  font-size: 14px !important;
+  transition: transform 0.2s ease !important;
+  color: white !important;
+}
+
+.panel-content {
+  background: white !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 8px !important;
+  padding: 20px !important;
+  margin-top: 8px !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+}
+
+/* Assignment styling within panels */
+.panel-content .assignment {
+  background: #f9fafb !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 6px !important;
+  padding: 16px !important;
+  margin-bottom: 12px !important;
+  transition: all 0.2s ease !important;
+}
+
+.panel-content .assignment:hover {
+  background: #f3f4f6 !important;
+  border-color: #d1d5db !important;
+}
+
+.panel-content .assignment h4 {
+  margin: 0 0 8px 0 !important;
+  color: #1f2937 !important;
+  font-size: 16px !important;
+}
+
+.panel-content .assignment p {
+  margin: 0 0 12px 0 !important;
+  color: #6b7280 !important;
+  line-height: 1.5 !important;
+}
+
+.submission-desc {
+  text-align: center !important;
+  padding: 20px !important;
+  color: #6b7280 !important;
+  font-style: italic !important;
+  background: #f9fafb !important;
+  border-radius: 6px !important;
+  border: 1px solid #e5e7eb !important;
+}
