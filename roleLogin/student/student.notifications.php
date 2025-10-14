@@ -4,13 +4,13 @@ include_once 'sidebar.php';
 include_once 'topbar.php';
 include '../../includes/dbh.inc.php';
 ?>
-<link rel="stylesheet" href="sidebar.css">
+<link rel="stylesheet" href="sidebark.css">
 <link rel="stylesheet" href="topbar.css">
-<link rel="stylesheet" href="notifications.css">
+<link rel="stylesheet" href="student.notifications.css">
 <div class="main-content">
   <div class="notifications-header">
-    <h1>Notifications</h1>
-    <p>Stay updated with important announcements and reminders.</p>
+    <h1 style="margin-bottom: 5px;">Notifications</h1>
+    <p style="margin-top: 0; margin-bottom: 24px;">Stay updated with important announcements and reminders.</p>
     <?php
     // Total notifications for students
   $totalResult = $conn->query("SELECT COUNT(*) as total FROM notifications WHERE FIND_IN_SET('student', audienceRole) AND sendDate <= NOW()");

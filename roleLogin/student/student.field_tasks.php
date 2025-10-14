@@ -6,10 +6,10 @@ include_once '../../includes/dbh.inc.php';
 ?>
 <link rel="stylesheet" href="student.submissions.css">
 
-<div class="main-content">
+<div class="main-content" style="margin-left: 270px; margin-top: 140px;">
     <div class="submissions-header">
-        <h1>Field Tasks</h1>
-        <p>View and manage your assigned field work tasks.</p>
+        <h1 style="margin-bottom: 5px;">Field Tasks</h1>
+        <p style="margin-top: 0; margin-bottom: 24px;">View and manage your assigned field work tasks.</p>
     </div>
     
     <!-- View Options -->

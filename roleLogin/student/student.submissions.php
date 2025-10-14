@@ -4,8 +4,8 @@ include_once 'sidebar.php';
 include_once 'topbar.php';
 include_once '../../includes/dbh.inc.php';
 ?>
-<link rel="stylesheet" href="students.submissions.css">
-<div class="main-content">
+<link rel="stylesheet" href="students.submissionsk.css">
+<div class="main-content" style="margin-top: 80px;">
   <div class="submissions-header">
     <h1>Submissions</h1>
     <p>All semesters are shown below.</p>

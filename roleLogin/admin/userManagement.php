@@ -1,3 +1,4 @@
+<div style="margin-top: 30px; padding: 20px;">
 <h1 style="font-size:2em; color:#1a3c6c; margin-bottom:8px;">User Management</h1>
 <p style="color:#6b7a90; margin-bottom:24px;">Manage students, instructors, and administrators</p>
 <div class="stats-cards">
@@ -78,4 +79,5 @@
         ?>
         </tbody>
     </table>
+</div>
 </div>

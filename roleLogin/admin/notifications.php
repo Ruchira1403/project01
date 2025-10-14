@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php include 'topbar.php'; ?>
 <?php include 'sidebar.php'; ?>
 
-<div class="main-content">
+<div class="main-content" style="margin-left: 320px; padding: 20px; margin-top: 180px;">
   <div class="notifications-header">
     <h1>Notifications</h1>
     <p>Send announcements and manage communications</p>

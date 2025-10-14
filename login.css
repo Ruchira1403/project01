@@ -2,34 +2,33 @@
 body {
   margin: 0;
   font-family: "Georgia", serif;
-  background: #e6f4f4; /* pale cyan */
+  background: #e6f4f4 url('images/4.jpg') no-repeat center center fixed;
+  background-size: cover;
 }
 
 /* Outer thin blue border around the page content (like your original) */
 .page-frame {
-  border: 3px solid #83b9e0; /* adjust to match your screenshot border color */
-  padding: 22px;
+  padding: 65px;
   min-height: calc(100vh - 44px);
   box-sizing: border-box;
 }
 
-/* main layout: left form, right image */
+/* main layout: centered login form only */
 .container {
-  display: flex;
-  background-color: #a1bcdb;
-  gap: 36px;              /* big gap between form and image */
-  align-items: flex-start;
+  display: block;
+  background-color: transparent;
   max-width: 1000px;
   margin: 18px auto;      /* centers the whole login area */
   padding: 6px;
   box-sizing: border-box;
-  border-radius: 10px;
 }
 
-/* LEFT: Login card (large light card) */
+/* Login card (centered) */
 .login-card {
-  background: #f8ffff;
-  width: 720px;           /* wide left card like your image */
+  background: rgba(158, 206, 230, 0.6);
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
   padding: 40px 48px 36px 48px;
   border-radius: 8px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
@@ -40,7 +39,7 @@ body {
 .title-row {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 12px;
   margin-bottom: 28px;
 }
 
@@ -55,12 +54,13 @@ body {
 /* big italic brown title to match screenshot */
 .page-title {
   color: #6b2f00; /* brown */
-  font-size: 44px; 
+  font-size: 26px; 
   line-height: 0.95;
   margin: 0;
   font-style: italic;
-  text-align: left; /* left aligned inside card (appears centered across full page in original) */
+  text-align: center; /* right aligned */
   letter-spacing: 0.6px;
+  flex: 1;
 }
 
 /* form fields - large labels, big gray input bars like screenshot */
@@ -126,12 +126,14 @@ body {
   text-align: center;
   margin-top: 18px;
   font-size: 15px;
-  color: #363636;
+  color: #2c2929;
+  font-weight: bold;
 }
 
 .forgot a {
-  color: #444;
+  color: #2a2828;
   text-decoration: none;
+  font-weight: bold;
 }
 
 .image{

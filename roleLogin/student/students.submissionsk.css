@@ -1,28 +1,25 @@
 .main-content {
   padding: 32px 24px;
   margin-left: 250px;
-  margin-top: 150px;
 }
 .submissions-header {
-  background: #e0e7ef;
   border-radius: 12px;
-  padding: 32px 24px 24px 24px;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 .submissions-header h1 {
   font-size: 2em;
-  margin-bottom: 6px;
-  color: #2563eb;
+  margin-bottom: -16px;
+  color: #090a0c;
 }
 .submissions-header p {
-  color: #64748b;
-  margin-bottom: 18px;
+  color: #101112;
+  margin-bottom: 24px;
   font-size: 1.1em;
 }
 .submissions-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: 24px; 
 }
 .submission-card {
   background: #fff;

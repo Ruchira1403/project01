@@ -40,7 +40,7 @@ $attendanceData = $attendanceRes ? $attendanceRes->fetch_assoc() : ['total' => 0
 $attendanceRate = $attendanceData['total'] > 0 ? round(($attendanceData['present'] / $attendanceData['total']) * 100) : 0;
 
 // Get recent assignments
-$recentAssignmentsRes = $conn->query("SELECT a.*, s.submissionId, s.grade, s.comment 
+$recentAssignmentsRes = $conn->query("SELECT a.*, s.submissionId, s.grade, s.comment, s.submittedAt 
     FROM assignments a 
     LEFT JOIN submissions s ON a.assignmentId = s.assignmentId AND s.studentId = $studentId
     WHERE a.batch = '" . $conn->real_escape_string($studentBatch) . "' 
@@ -51,11 +51,18 @@ $notificationsRes = $conn->query("SELECT * FROM notifications
     WHERE FIND_IN_SET('student', audienceRole) AND sendDate <= NOW() 
     ORDER BY sendDate DESC LIMIT 3");
 ?>
-<link rel="stylesheet" href="sidebar.css">
+<link rel="stylesheet" href="sidebark.css">
 <link rel="stylesheet" href="topbar.css">
-<link rel="stylesheet" href="dashboard.css">
+<link rel="stylesheet" href="student_dashboard.css">
 <div class="main-content">
    
+
+<div class="dashboard-header">
+        <h1 style="margin-bottom: 5px;">Student Dashboard</h1>
+        <p style="margin-top: 0; margin-bottom: 24px;">Welcome back! Here's your academic progress.</p>
+    </div>
+
+
     <div class="dashboard-stats-row">
         <div class="dashboard-stat">
             <div class="stat-title">Total Assignments</div>
