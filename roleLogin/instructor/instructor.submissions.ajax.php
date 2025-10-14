@@ -68,7 +68,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['batch']) && isset($_P
                     
                     // Actions column
                     echo '<td style="padding:12px; border:1px solid #e5e7eb;">';
-                    echo '<button onclick="openGradingModal(' . $sub['submissionId'] . ', \'' . htmlspecialchars($sub['usersUid']) . '\', ' . ($sub['grade'] !== null ? $sub['grade'] : 'null') . ', \'' . htmlspecialchars($sub['comment'] ?? '') . '\')" style="background:#2563eb; color:white; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; font-size:12px;">Grade</button>';
+                    $comment = htmlspecialchars($sub['comment'] ?? '', ENT_QUOTES);
+                    $grade = $sub['grade'] !== null ? htmlspecialchars($sub['grade'], ENT_QUOTES) : 'null';
+                    $studentUid = htmlspecialchars($sub['usersUid'], ENT_QUOTES);
+                    echo '<button onclick="openGradingModal(' . $sub['submissionId'] . ', \'' . $studentUid . '\', \'' . $grade . '\', \'' . $comment . '\')" style="background:#2563eb; color:white; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; font-size:12px;">Grade</button>';
                     echo '</td>';
                     echo '</tr>';
                 }

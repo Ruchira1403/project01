@@ -1,7 +1,7 @@
 <?php
 include_once 'header.php';
 ?>
-<link rel="stylesheet" href="login.css">
+<link rel="stylesheet" href="logins.css">
 
 <?php
 $errorMsg = '';
@@ -22,7 +22,7 @@ if (isset($_GET['error'])) {
   <div class="container">
     <div class="login-card">
       <div class="title-row">
-        <img class="title-icon" src="images/logo.jpg" alt="icon">
+        <img class="title-icon" src="images/2.jpg" alt="icon">
         <h1 class="page-title">
           Welcome to GeoSurvey<br>
           Academic Field Portal

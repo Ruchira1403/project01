@@ -14,7 +14,7 @@
   z-index: 100;
 }
 .logo {
-  font-size: 1.5em;
+  font-size: 2.2em;
   font-weight: bold;
   margin-left: 32px;
   margin-bottom: 18px;
@@ -79,7 +79,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <a href="instructor.assignments.php" class="<?php echo ($currentPage == 'instructor.assignments.php') ? 'active' : ''; ?>">&#128197; Schedule assignments</a>
         <a href="instructor.field_tasks.php" class="<?php echo ($currentPage == 'instructor.field_tasks.php') ? 'active' : ''; ?>">&#128218; Resources</a>
         <a href="instructor.viva_sessions.php" class="<?php echo ($currentPage == 'instructor.viva_sessions.php') ? 'active' : ''; ?>">&#128203; Viva Sessions</a>
-        <a href="instructor.notifications.php" class="<?php echo ($currentPage == 'instructor.notifications.php') ? 'active' : ''; ?>">&#128276; Feedback</a>
+        <a href="instructor.notifications.php" class="<?php echo ($currentPage == 'instructor.notifications.php') ? 'active' : ''; ?>">&#128276; notifications</a>
     </nav>
     <a href="../../login.php" class="logout">&#8592; Logout</a>
 </div>

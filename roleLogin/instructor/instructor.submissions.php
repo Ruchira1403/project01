@@ -38,13 +38,13 @@ include_once 'topbar.php';
                 echo '</button>';
                 echo '<div class="batch-content" id="batch-' . $batch . '" style="display:none; background:#f8fafc; border:1px solid #e2e8f0; border-top:none; border-radius:0 0 4px 4px; padding:16px;">';
                 echo '<div id="semester-panel-' . $batch . '"></div>';
+                echo '<div id="topic-panel-' . $batch . '"></div>';
                 echo '</div>';
                 echo '</div>';
             }
             echo '</div>';
         }
         ?>
-        <div id="topic-panel"></div>
     </div>
 </div>
 
@@ -120,7 +120,7 @@ function showSemester(batch) {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             document.getElementById('semester-panel-' + batch).innerHTML = xhr.responseText;
-            document.getElementById('topic-panel').innerHTML = '';
+            document.getElementById('topic-panel-' + batch).innerHTML = '';
         }
     };
     xhr.send('batch=' + encodeURIComponent(batch));
@@ -132,7 +132,7 @@ function showTopics(batch, semester) {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            document.getElementById('topic-panel').innerHTML = xhr.responseText;
+            document.getElementById('topic-panel-' + batch).innerHTML = xhr.responseText;
         }
     };
     xhr.send('batch=' + encodeURIComponent(batch) + '&semester=' + encodeURIComponent(semester));
@@ -140,8 +140,8 @@ function showTopics(batch, semester) {
 
 function openGradingModal(submissionId, studentUid, currentGrade, currentComment) {
     document.getElementById('submissionId').value = submissionId;
-    document.getElementById('studentUid').value = studentUid;
-    document.getElementById('grade').value = currentGrade !== 'null' ? currentGrade : '';
+    document.getElementById('studentUid').value = studentUid || '';
+    document.getElementById('grade').value = (currentGrade && currentGrade !== 'null') ? currentGrade : '';
     document.getElementById('comment').value = currentComment || '';
     document.getElementById('gradingModal').style.display = 'block';
 }
