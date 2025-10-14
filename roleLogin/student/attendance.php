@@ -1,5 +1,9 @@
 <?php
 session_start();
+include_once 'sidebar.php';
+include_once 'topbar.php';
+include_once '../../includes/dbh.inc.php';
+
 if (!isset($_SESSION["userid"]) || strtolower($_SESSION["userrole"]) !== "student") {
     header("location: ../../login.php");
     exit();
@@ -113,7 +117,8 @@ if ($studentBatch) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Attendance - GeoSurvey</title>
-    <link rel="stylesheet" href="sidebar.css">
+    <link rel="stylesheet" href="sidebark.css">
+    <link rel="stylesheet" href="topbar.css">
     <style>
         * {
             margin: 0;
@@ -122,13 +127,13 @@ if ($studentBatch) {
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f8fafc;
             color: #1e293b;
         }
 
         .main-content {
-            margin-left: 220px;
+            margin-left: 240px;
+            margin-top: 100px;
             padding: 32px;
             min-height: 100vh;
         }
@@ -138,15 +143,15 @@ if ($studentBatch) {
         }
 
         .page-title {
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-size: 2.08rem;
+            font-weight: 600;
             color: #1e293b;
             margin-bottom: 8px;
         }
 
         .page-subtitle {
             font-size: 1.1rem;
-            color: #64748b;
+            color:rgb(0, 0, 0);
         }
 
         .summary-cards {

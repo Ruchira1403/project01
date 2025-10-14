@@ -1,11 +1,10 @@
-<style>
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
   width: 220px;
   height: 100vh;
-  background: #ecedef;
+  background: linear-gradient(180deg, #efeded 0%, #e5e7eb 100%);
   color: #201490;
   display: flex;
   flex-direction: column;
@@ -14,7 +13,7 @@
   z-index: 100;
 }
 .logo {
-  font-size: 2.2em;
+  font-size: 1.5em;
   font-weight: bold;
   margin-left: 32px;
   margin-bottom: 18px;
@@ -23,7 +22,7 @@
   font-size: 1.1em;
   margin-left: 32px;
   margin-bottom: 24px;
-  color: #dbeafe;
+  color: #201490;
 }
 nav {
   width: 100%;
@@ -72,148 +71,127 @@ nav a:active::before {
   height: 300px;
 }
 
-/* Dashboard blue styling when active */
-nav a[href="instructor.home.php"].active {
+/* Field Tasks blue styling when active */
+nav a[href="student.field_tasks.php"].active {
   background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
   color: #ffffff;
   border-left: 4px solid #60b3e6;
   box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
 }
 
-nav a[href="instructor.home.php"]:hover {
+nav a[href="student.field_tasks.php"]:hover {
   background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   color: #ffffff;
   transform: translateX(5px);
   box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
 }
 
-nav a[href="instructor.home.php"]:active {
-  background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
-  color: #ffffff;
-  transform: scale(0.98);
-}
-
-/* Students blue styling when active */
-nav a[href="instructor.attendance.php"].active {
-  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
-  color: #ffffff;
-  border-left: 4px solid #60b3e6;
-  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
-}
-
-nav a[href="instructor.attendance.php"]:hover {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-  color: #ffffff;
-  transform: translateX(5px);
-  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
-}
-
-nav a[href="instructor.attendance.php"]:active {
-  background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
-  color: #ffffff;
-  transform: scale(0.98);
-}
-
-/* Submissions blue styling when active */
-nav a[href="instructor.submissions.php"].active {
-  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
-  color: #ffffff;
-  border-left: 4px solid #60b3e6;
-  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
-}
-
-nav a[href="instructor.submissions.php"]:hover {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-  color: #ffffff;
-  transform: translateX(5px);
-  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
-}
-
-nav a[href="instructor.submissions.php"]:active {
-  background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
-  color: #ffffff;
-  transform: scale(0.98);
-}
-
-/* Schedule assignments blue styling when active */
-nav a[href="instructor.assignments.php"].active {
-  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
-  color: #ffffff;
-  border-left: 4px solid #60b3e6;
-  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
-}
-
-nav a[href="instructor.assignments.php"]:hover {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-  color: #ffffff;
-  transform: translateX(5px);
-  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
-}
-
-nav a[href="instructor.assignments.php"]:active {
-  background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
-  color: #ffffff;
-  transform: scale(0.98);
-}
-
-/* Resources blue styling when active */
-nav a[href="instructor.field_tasks.php"].active {
-  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
-  color: #ffffff;
-  border-left: 4px solid #60b3e6;
-  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
-}
-
-nav a[href="instructor.field_tasks.php"]:hover {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-  color: #ffffff;
-  transform: translateX(5px);
-  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
-}
-
-nav a[href="instructor.field_tasks.php"]:active {
-  background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
-  color: #ffffff;
-  transform: scale(0.98);
-}
-
-/* Viva Sessions blue styling when active */
-nav a[href="instructor.viva_sessions.php"].active {
-  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
-  color: #ffffff;
-  border-left: 4px solid #60b3e6;
-  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
-}
-
-nav a[href="instructor.viva_sessions.php"]:hover {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-  color: #ffffff;
-  transform: translateX(5px);
-  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
-}
-
-nav a[href="instructor.viva_sessions.php"]:active {
+nav a[href="student.field_tasks.php"]:active {
   background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
   color: #ffffff;
   transform: scale(0.98);
 }
 
 /* Notifications blue styling when active */
-nav a[href="instructor.notifications.php"].active {
+nav a[href="student.notifications.php"].active {
   background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
   color: #ffffff;
   border-left: 4px solid #60b3e6;
   box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
 }
 
-nav a[href="instructor.notifications.php"]:hover {
+nav a[href="student.notifications.php"]:hover {
   background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   color: #ffffff;
   transform: translateX(5px);
   box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
 }
 
-nav a[href="instructor.notifications.php"]:active {
+nav a[href="student.notifications.php"]:active {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
+  color: #ffffff;
+  transform: scale(0.98);
+}
+
+/* Dashboard blue styling when active */
+nav a[href="student.home.php"].active {
+  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+  color: #ffffff;
+  border-left: 4px solid #60b3e6;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+nav a[href="student.home.php"]:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
+  transform: translateX(5px);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+}
+
+nav a[href="student.home.php"]:active {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
+  color: #ffffff;
+  transform: scale(0.98);
+}
+
+/* Submissions blue styling when active */
+nav a[href="student.submissions.php"].active {
+  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+  color: #ffffff;
+  border-left: 4px solid #60b3e6;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+nav a[href="student.submissions.php"]:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
+  transform: translateX(5px);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+}
+
+nav a[href="student.submissions.php"]:active {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
+  color: #ffffff;
+  transform: scale(0.98);
+}
+
+/* Viva Sessions blue styling when active */
+nav a[href="student.viva_sessions.php"].active {
+  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+  color: #ffffff;
+  border-left: 4px solid #60b3e6;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+nav a[href="student.viva_sessions.php"]:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
+  transform: translateX(5px);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+}
+
+nav a[href="student.viva_sessions.php"]:active {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
+  color: #ffffff;
+  transform: scale(0.98);
+}
+
+/* Attendance blue styling when active */
+nav a[href="attendance.php"].active {
+  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+  color: #ffffff;
+  border-left: 4px solid #60b3e6;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+nav a[href="attendance.php"]:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
+  transform: translateX(5px);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+}
+
+nav a[href="attendance.php"]:active {
   background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
   color: #ffffff;
   transform: scale(0.98);
@@ -234,29 +212,3 @@ nav a[href="instructor.notifications.php"]:active {
   border-bottom: none;
   padding: 15px 32px;
 }
-</style>
-
-<?php
-// Get current page name for active highlighting
-$currentPage = basename($_SERVER['PHP_SELF']);
-?>
-<div class="sidebar">
-    <div class="logo">GeoSurvey</div>
-    <div class="role" style="color: #201490; margin-top: -12px; margin-bottom: 32px;">
-        <?php 
-        // Get user role from session, fallback to 'Student' if not set
-        $userRole = isset($_SESSION['userrole']) ? ucfirst($_SESSION['userrole']) : 'Instructor';
-        echo $userRole;
-        ?>
-    </div>
-    <nav>
-        <a href="instructor.home.php" class="<?php echo ($currentPage == 'instructor.home.php') ? 'active' : ''; ?>">&#127968; Dashboard</a>
-        <a href="instructor.attendance.php" class="<?php echo ($currentPage == 'instructor.attendance.php') ? 'active' : ''; ?>">&#128101; Attendance</a>
-        <a href="instructor.submissions.php" class="<?php echo ($currentPage == 'instructor.submissions.php') ? 'active' : ''; ?>">&#128196; Submissions</a>
-        <a href="instructor.assignments.php" class="<?php echo ($currentPage == 'instructor.assignments.php') ? 'active' : ''; ?>">&#128197; Schedule assignments</a>
-        <a href="instructor.field_tasks.php" class="<?php echo ($currentPage == 'instructor.field_tasks.php') ? 'active' : ''; ?>">&#128218; Resources</a>
-        <a href="instructor.viva_sessions.php" class="<?php echo ($currentPage == 'instructor.viva_sessions.php') ? 'active' : ''; ?>">&#128203; Viva Sessions</a>
-        <a href="instructor.notifications.php" class="<?php echo ($currentPage == 'instructor.notifications.php') ? 'active' : ''; ?>">&#128276; notifications</a>
-    </nav>
-    <a href="../../login.php" class="logout">&#8592; Logout</a>
-</div>

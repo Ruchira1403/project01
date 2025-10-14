@@ -71,9 +71,7 @@ include '../../includes/dbh.inc.php';
                 <div class="info">
                    
                     <div class="name" style="font-weight:bold; font-size:1.15em;"><?php echo htmlspecialchars($_SESSION['useruid']); ?></div>
-                     <div class="role" style="color:rgb(91, 92, 157);">
-                        <?php echo isset($_SESSION['userrole']) ? htmlspecialchars($_SESSION['userrole']) : 'Unknown'; ?>
-                    </div>
+                     
                 </div>
         </span>
     </div>
