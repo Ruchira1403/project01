@@ -15,16 +15,29 @@
 }
 .topbar-left {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  flex-direction: row;
+}
+.topbar-branding {
+  display: flex;
+  align-items: center;
+}
+.topbar-title-section {
+  display: flex;
+  align-items: center;
 }
 .page-title {
   font-size: 1.35em;
   font-weight: 700;
   color: #2563eb;
+  display: inline;
+  white-space: nowrap;
 }
 .page-desc {
   font-size: 1em;
   color: #374151;
+  display: inline;
+  white-space: nowrap;
 }
 .topbar-right {
   display: flex;
@@ -71,5 +84,9 @@
 }
 .user-role {
   font-size: 0.95em;
-  color: #6b7280;
+  color: #dc000b;
+}
+.topbar-logo {
+  display: inline-block;
+  vertical-align: middle;
 }

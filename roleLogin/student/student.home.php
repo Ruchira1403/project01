@@ -163,16 +163,16 @@ $notificationsRes = $conn->query("SELECT * FROM notifications
                         $cardClass = 'viva';
                     }
                     
-                    echo '<div class="notification-card ' . $cardClass . '">';
-                    echo '<div class="notification-title">' . htmlspecialchars($notification['title']) . '</div>';
-                    echo '<div class="notification-desc">' . htmlspecialchars($notification['massege']) . '</div>';
-                    echo '<div class="notification-time">' . date('M j, Y', strtotime($notification['sendDate'])) . '</div>';
+                    echo '<div class="notification-card ' . $cardClass . '" style="background: #f0f9ff; border: 1px solid #0ea5e9; border-radius: 8px; padding: 16px; margin-bottom: 12px;">';
+                    echo '<div class="notification-title" style="color: #0c4a6e; font-weight: bold; font-size: 1.1em; margin-bottom: 8px;">' . htmlspecialchars($notification['title']) . '</div>';
+                    echo '<div class="notification-desc" style="color: #0369a1; margin-bottom: 8px;">' . htmlspecialchars($notification['massege']) . '</div>';
+                    echo '<div class="notification-time" style="color: #0284c7; font-size: 0.9em;">' . date('M j, Y', strtotime($notification['sendDate'])) . '</div>';
                     echo '</div>';
                 }
             } else {
-                echo '<div class="notification-card">';
-                echo '<div class="notification-title">No notifications</div>';
-                echo '<div class="notification-desc">You have no recent notifications</div>';
+                echo '<div class="notification-card" style="background: #f0f9ff; border: 1px solid #0ea5e9; border-radius: 8px; padding: 16px; margin-bottom: 12px;">';
+                echo '<div class="notification-title" style="color: #0c4a6e; font-weight: bold; font-size: 1.1em; margin-bottom: 8px;">No notifications</div>';
+                echo '<div class="notification-desc" style="color: #0369a1; margin-bottom: 8px;">You have no recent notifications</div>';
                 echo '</div>';
             }
             ?>
