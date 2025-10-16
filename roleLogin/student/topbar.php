@@ -3,7 +3,7 @@ include '../../includes/dbh.inc.php';
 ?>
 
 <link rel="stylesheet" href="topbar.css">
-<div class="topbar">
+<div class="topbar" style="margin-top: 30px;">
     <div class="topbar-left" style="display: flex; align-items: center; flex-direction: row;">
         <img class="topbar-logo" src="../../images/2.jpg" alt="GeoSurvey Logo" style="width: 40px; height: 40px; margin-right: 12px; border-radius: 6px; display: inline-block; vertical-align: middle;">
         <span class="page-title" style="font-size: 1.4em; font-weight: bold; color: #2c3e50; display: inline; white-space: nowrap;">GeoSurvey Portal</span>

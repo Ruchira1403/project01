@@ -8,9 +8,16 @@ include '../../includes/dbh.inc.php';
 <link rel="stylesheet" href="topbar.css">
 <link rel="stylesheet" href="student.notifications.css">
 <div class="main-content">
-  <div class="notifications-header">
-    <h1 style="margin-bottom: 5px;">Notifications</h1>
-    <p style="margin-top: 0; margin-bottom: 24px;">Stay updated with important announcements and reminders.</p>
+  <div class="page-header">
+    
+  <div class="page-header1">
+  <h1>🔔 Notifications</h1>
+    <p>Stay updated with important announcements and reminders.</p>
+
+  </div>
+
+
+  
     <?php
     // Total notifications for students
   $totalResult = $conn->query("SELECT COUNT(*) as total FROM notifications WHERE FIND_IN_SET('student', audienceRole) AND sendDate <= NOW()");
@@ -27,6 +34,9 @@ include '../../includes/dbh.inc.php';
   $todayResult = $conn->query("SELECT COUNT(*) as today FROM notifications WHERE FIND_IN_SET('student', audienceRole) AND DATE(sendDate) = '$today' AND sendDate <= NOW()");
   $todayCount = ($todayResult && $todayResult->num_rows > 0) ? $todayResult->fetch_assoc()['today'] : 0;
     ?>
+
+
+
     <div class="notifications-summary-row">
       <div class="notifications-summary-box">
         <div class="summary-title">Total</div>

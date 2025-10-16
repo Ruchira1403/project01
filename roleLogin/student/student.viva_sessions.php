@@ -5,11 +5,34 @@ include_once 'topbar.php';
 include_once '../../includes/dbh.inc.php';
 ?>
 <link rel="stylesheet" href="student.submissions.css">
+<style>
+/* Page Header Styles */
+.page-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-<div class="main-content" style="margin-left: 270px; margin-top: 140px;">
-    <div class="submissions-header">
-        <h1 style="margin-bottom: 5px;">Viva Sessions</h1>
-        <p style="margin-top: 0; margin-bottom: 24px;">View your scheduled oral examinations and results.</p>
+.page-header h1 {
+  margin: 0;
+  font-size: 2.5em;
+  font-weight: 300;
+}
+
+.page-header p {
+  margin: 10px 0 0 0;
+  opacity: 0.9;
+  font-size: 1.1em;
+}
+</style>
+
+<div class="main-content" style="margin-left: 270px; margin-top: 140px; margin-right: 50px">
+    <div class="page-header">
+        <h1>🎤 Viva Sessions</h1>
+        <p>View your scheduled oral examinations and results.</p>
     </div>
 
     <!-- Summary Cards -->
