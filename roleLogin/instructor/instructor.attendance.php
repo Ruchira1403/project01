@@ -43,7 +43,7 @@ include_once 'topbar.php';
   background-color: #1976D2;
 }
 </style>
-<div class="main-content">
+<div class="main-content" style="margin-top: 80px;">
   <div class="dashboard-header">
     <h1>Attendance Management</h1>
     <p>Track and manage student attendance for field sessions.</p>

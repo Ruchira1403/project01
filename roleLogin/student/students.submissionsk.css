@@ -2,18 +2,25 @@
   padding: 32px 24px;
   margin-left: 250px;
 }
-.submissions-header {
+/* Page Header Styles */
+.page-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 30px;
   border-radius: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.submissions-header h1 {
-  font-size: 2em;
-  margin-bottom: -16px;
-  color: #090a0c;
+
+.page-header h1 {
+  margin: 0;
+  font-size: 2.5em;
+  font-weight: 300;
 }
-.submissions-header p {
-  color: #101112;
-  margin-bottom: 24px;
+
+.page-header p {
+  margin: 10px 0 0 0;
+  opacity: 0.9;
   font-size: 1.1em;
 }
 .submissions-list {
@@ -63,7 +70,7 @@
 }
 
 .panel-toggle {
-  background: #2563eb !important;
+  background: #5a7fce !important;
   color: white !important;
   border: none !important;
   border-radius: 8px !important;

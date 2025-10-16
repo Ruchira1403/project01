@@ -133,25 +133,31 @@ if ($studentBatch) {
 
         .main-content {
             margin-left: 240px;
-            margin-top: 100px;
+            margin-top: 140px;
             padding: 32px;
             min-height: 100vh;
+            margin-right: 40px;
         }
 
         .page-header {
-            margin-bottom: 32px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .page-title {
-            font-size: 2.08rem;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 8px;
+        .page-header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
         }
 
-        .page-subtitle {
-            font-size: 1.1rem;
-            color:rgb(0, 0, 0);
+        .page-header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1em;
         }
 
         .summary-cards {
@@ -427,8 +433,8 @@ if ($studentBatch) {
     
     <div class="main-content">
         <div class="page-header">
-            <h1 class="page-title">Attendance</h1>
-            <p class="page-subtitle">Track your field session attendance and participation.</p>
+            <h1>📅 Attendance</h1>
+            <p>Track your field session attendance and participation.</p>
         </div>
 
         <!-- Summary Cards -->

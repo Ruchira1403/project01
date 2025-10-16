@@ -54,12 +54,12 @@ $notificationsRes = $conn->query("SELECT * FROM notifications
 <link rel="stylesheet" href="sidebark.css">
 <link rel="stylesheet" href="topbar.css">
 <link rel="stylesheet" href="student_dashboard.css">
-<div class="main-content">
+<div class="main-content " style="margin-top: 140px;">
    
 
-<div class="dashboard-header">
-        <h1 style="margin-bottom: 5px;">Student Dashboard</h1>
-        <p style="margin-top: 0; margin-bottom: 24px;">Welcome back! Here's your academic progress.</p>
+<div class="page-header">
+        <h1>🏠 Student Dashboard</h1>
+        <p>Welcome back! Here's your academic progress and overview.</p>
     </div>
 
 
