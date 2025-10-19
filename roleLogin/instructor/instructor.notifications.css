@@ -1,10 +1,11 @@
 /* Notifications page styles for instructor panel */
 .main-content {
   margin-left: 220px;
-  margin-top: 64px;
+  margin-top: 100px;
   padding: 32px 38px;
   background: #f9fafb;
   min-height: 100vh;
+  max-width: 1560px;
 }
 .notifications-header h1 {
   font-size: 2em;

@@ -10,12 +10,23 @@ include_once 'topbar.php';
     margin-left: 250px !important;
     margin-right: 50px !important;
 }
+/* Gradient page header to match Resources */
+.page-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.page-header h1 { margin: 0; font-size: 2.5em; font-weight: 300; }
+.page-header p { margin: 10px 0 0 0; opacity: 0.9; font-size: 1.1em; }
 </style>
 
 <div class="main-content">
-    <div class="dashboard-header">
-        <h1>Field Tasks Management</h1>
-        <p>Create and manage field work tasks for your students.</p>
+    <div class="page-header">
+        <h1>🧭 Field Tasks</h1>
+        <p>Create and manage field work tasks for your students</p>
     </div>
 
     <!-- Action Buttons -->

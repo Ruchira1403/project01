@@ -13,9 +13,9 @@ include_once 'topbar.php';
 </style>
 
 <div class="main-content">
-    <div class="dashboard-header">
-        <h1>Assignment Submissions</h1>
-        <p>View all student submissions for your assignments.</p>
+    <div class="page-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 1560px;">
+        <h1 style="margin:0; font-size:2.5em; font-weight:300;">📝 Submissions</h1>
+        <p style="margin:10px 0 0 0; opacity:0.9; font-size:1.1em;">View and manage assignment submissions</p>
     </div>
 
     <div class="submissions-list">

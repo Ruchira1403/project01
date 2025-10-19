@@ -274,7 +274,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <a href="instructor.home.php" class="<?php echo ($currentPage == 'instructor.home.php') ? 'active' : ''; ?>">&#127968; Dashboard</a>
         <a href="instructor.attendance.php" class="<?php echo ($currentPage == 'instructor.attendance.php') ? 'active' : ''; ?>">&#128101; Attendance</a>
         <a href="instructor.submissions.php" class="<?php echo ($currentPage == 'instructor.submissions.php') ? 'active' : ''; ?>">&#128196; Submissions</a>
-        <a href="instructor.assignments.php" class="<?php echo ($currentPage == 'instructor.assignments.php') ? 'active' : ''; ?>">&#128197; Schedule assignments</a>
+        <a href="instructor.assignments.php" class="<?php echo ($currentPage == 'instructor.assignments.php') ? 'active' : ''; ?>">&#128197; Schedule Links</a>
         <a href="instructor.field_tasks.php" class="<?php echo ($currentPage == 'instructor.field_tasks.php') ? 'active' : ''; ?>">&#128218; Feild Task</a>
         <a href="instructor.resources.php" class="<?php echo ($currentPage == 'instructor.resources.php') ? 'active' : ''; ?>">&#128193; Resources</a>
         <a href="instructor.viva_sessions.php" class="<?php echo ($currentPage == 'instructor.viva_sessions.php') ? 'active' : ''; ?>">&#128203; Viva Sessions</a>

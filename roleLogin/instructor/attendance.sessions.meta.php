@@ -8,7 +8,8 @@ $instructorId = intval($_SESSION['userid']);
 // If calendar parameter is set, return dates with sessions
 if (isset($_GET['calendar']) && $_GET['calendar'] == '1') {
   $dates = [];
-  $dRes = $conn->query("SELECT DISTINCT attendanceDate FROM attendance WHERE instructorId = $instructorId ORDER BY attendanceDate DESC");
+  // Normalize to YYYY-MM-DD to avoid time components affecting comparisons
+  $dRes = $conn->query("SELECT DISTINCT DATE_FORMAT(DATE(attendanceDate), '%Y-%m-%d') AS attendanceDate FROM attendance WHERE instructorId = $instructorId ORDER BY attendanceDate DESC");
   if ($dRes) { while($r = $dRes->fetch_assoc()) { $dates[] = $r['attendanceDate']; } }
   echo json_encode(['dates'=>$dates]);
   exit;

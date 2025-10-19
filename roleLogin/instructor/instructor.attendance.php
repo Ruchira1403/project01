@@ -6,6 +6,9 @@ include_once 'topbar.php';
 ?>
 <link rel="stylesheet" href="instructor.attendanceform.css">
 <style>
+.main-content {
+  max-width: 1560px;
+}
 .modal {
   position: fixed;
   top: 0;
@@ -44,9 +47,9 @@ include_once 'topbar.php';
 }
 </style>
 <div class="main-content" style="margin-top: 80px;">
-  <div class="dashboard-header">
-    <h1>Attendance Management</h1>
-    <p>Track and manage student attendance for field sessions.</p>
+  <div class="page-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 1560px;">
+    <h1 style="margin:0; font-size:2.5em; font-weight:300;">🗓️ Attendance</h1>
+    <p style="margin:10px 0 0 0; opacity:0.9; font-size:1.1em;">Track and manage student attendance for field sessions</p>
   </div>
   <div class="attendance-summary">
     <div class="summary-card">
@@ -317,7 +320,7 @@ function renderCalendar(date){
     var ds = d<10? '0'+d : ''+d;
     var m = (month+1)<10? '0'+(month+1): ''+(month+1);
     var iso = year+'-'+m+'-'+ds;
-    html += '<td style="cursor:pointer;" onclick="onCalendarDate(\''+iso+'\')">'+d+'</td>';
+    html += '<td style="cursor:pointer;" data-date="'+iso+'" onclick="onCalendarDate(\''+iso+'\')">'+d+'</td>';
     if ((startDay + d) % 7 === 0) html += '</tr><tr>';
   }
   html += '</tr></table>';
@@ -341,15 +344,19 @@ function loadCalendarSessions() {
     if (xhr.readyState === 4 && xhr.status === 200) {
       try {
         var data = JSON.parse(xhr.responseText);
-        // Highlight dates with sessions
-        data.dates.forEach(function(date) {
-          var cells = document.querySelectorAll('#calendar td');
-          cells.forEach(function(cell) {
-            if (cell.textContent.trim() === date.split('-')[2]) {
-              cell.style.backgroundColor = '#e3f2fd';
-              cell.style.fontWeight = 'bold';
-            }
-          });
+        // Highlight dates with sessions (match full YYYY-MM-DD to avoid cross-month coloring)
+        var cells = document.querySelectorAll('#calendar td[data-date]');
+        // Normalize incoming dates to YYYY-MM-DD strings
+        var normalized = (data.dates || []).map(function(d){
+          try { return new Date(d).toISOString().slice(0,10); } catch(e) { return String(d).slice(0,10); }
+        });
+        var dateSet = new Set(normalized);
+        cells.forEach(function(cell) {
+          var cellDate = cell.getAttribute('data-date');
+          if (dateSet.has(cellDate)) {
+            cell.style.backgroundColor = '#e3f2fd';
+            cell.style.fontWeight = 'bold';
+          }
         });
       } catch(e) { /* ignore */ }
     }

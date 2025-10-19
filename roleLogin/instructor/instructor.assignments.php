@@ -19,10 +19,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   echo "<div style='color:green; margin:16px;'>Assignment created successfully!</div>";
 }
 ?>
-<link rel="stylesheet" href="instructor.assignments.css">
+<link rel="stylesheet" href="instructor.assignment.css">
 <div class="main-content">
-  <div class="dashboard-header">
-    <h1>Create Assignment</h1>
+  <div class="page-header">
+    
+  <div class="page-header1">
+
+  <h1>🧾 Submission Links</h1>
+    <p>Create submission links and set due dates for batches and semesters</p>
+
+  </div>
+  
     <form action="instructor.assignments.php" method="post" style="max-width:400px;">
       <label for="semester">Semester</label>
       <select name="semester" id="semester" required>
