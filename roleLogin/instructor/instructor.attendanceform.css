@@ -17,27 +17,30 @@ body {
 }
 .attendance-summary {
   display: flex;
-  gap: 24px;
-  margin-bottom: 32px;
+  gap: 18px;
+  margin-bottom: 24px;
+  justify-content: flex-end; /* right align under header */
+  flex-wrap: wrap;
 }
 .summary-card {
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 2px 8px #e0e7ef;
-  padding: 24px 32px;
-  min-width: 300px;
+  padding: 18px 24px;
+  width: 220px;
+  max-width: 220px;
   text-align: center;
 }
 .summary-title {
   color: #64748b;
-  font-size: 1em;
-  margin-bottom: 8px;
+  font-size: 0.95em;
+  margin-bottom: 6px;
 }
 .summary-value {
-  font-size: 2em;
+  font-size: 1.8em;
   font-weight: bold;
   color: #2563eb;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 .summary-attendance { color: #f59e42; }
 .summary-risk { color: #dc2626; }

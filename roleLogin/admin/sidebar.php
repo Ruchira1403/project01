@@ -72,21 +72,21 @@ nav a:active::before {
 }
 
 /* User Management blue styling when active */
-nav a[href="admin.home.php"].active {
+nav a[href="admin.user.php"].active {
   background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
   color: #ffffff;
   border-left: 4px solid #60b3e6;
   box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
 }
 
-nav a[href="admin.home.php"]:hover {
+nav a[href="admin.user.php"]:hover {
   background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   color: #ffffff;
   transform: translateX(5px);
   box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
 }
 
-nav a[href="admin.home.php"]:active {
+nav a[href="admin.user.php"]:active {
   background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
   color: #ffffff;
   transform: scale(0.98);
@@ -144,11 +144,11 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         ?>
     </div>
     <nav>
-        <a href="dashboard.php" class="<?php echo ($currentPage == 'dashboard.php') ? 'active' : ''; ?>">&#127968; Dashboard</a>
-        <a href="admin.home.php" class="<?php echo ($currentPage == 'admin.home.php') ? 'active' : ''; ?>">&#128101; User Management</a>
+        <a href="admin.dashboard.php" class="<?php echo ($currentPage == 'admin.dashboard.php') ? 'active' : ''; ?>">&#127968; Dashboard</a>
+        <a href="admin.user.php" class="<?php echo ($currentPage == 'admin.user.php') ? 'active' : ''; ?>">&#128101; User Management</a>
         <a href="notifications.php" class="<?php echo ($currentPage == 'notifications.php') ? 'active' : ''; ?>">&#128276; Notifications</a>
-        <a href="#" class="<?php echo ($currentPage == 'analytics.php') ? 'active' : ''; ?>">&#128202; Analytics</a>
-        <a href="#" class="<?php echo ($currentPage == 'settings.php') ? 'active' : ''; ?>">&#9881; Settings</a>
+        <a href="admin.analytics.php" class="<?php echo ($currentPage == 'admin.analytics.php') ? 'active' : ''; ?>">&#128202; Analytics</a>
+        <a href="settings.php" class="<?php echo ($currentPage == 'settings.php') ? 'active' : ''; ?>">&#9881; Settings</a>
     </nav>
     <a href="../../login.php" class="logout">&#8592; Logout</a>
 </div>

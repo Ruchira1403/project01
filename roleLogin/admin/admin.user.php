@@ -24,7 +24,7 @@ if ($result) {
         }
 }
 ?>
-<link rel="stylesheet" href="admin.home.css">
+<link rel="stylesheet" href="admin.user.css">
 <?php include 'sidebar.php'; ?>
 <?php include 'topbar.php'; ?>
 <div class="main-content">

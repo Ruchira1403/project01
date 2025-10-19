@@ -166,14 +166,14 @@ while ($row = $batchesResult->fetch_assoc()) {
         body {
            
             background-color: #f8fafc;
-            margin-left: -50px;
-            margin-top: 120px;
+            margin-left: 250px;
+            margin-top: 100px;
         }
         
         .main-content {
             padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+            max-width: 1560px;
+            
         }
         
         .page-header {
