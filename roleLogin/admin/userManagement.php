@@ -1,6 +1,10 @@
-<div style="margin-top: 30px; padding: 20px;">
-<h1 style="font-size:2em; color:#1a3c6c; margin-bottom:8px;">User Management</h1>
-<p style="color:#6b7a90; margin-bottom:24px;">Manage students, instructors, and administrators</p>
+<div style="margin-top: 80px; padding: 20px;">
+
+<div class="page-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 1560px;">
+    <h1 style="margin:0; font-size:2.5em; font-weight:300;color: white;">&#128101; User Management</h1>
+    <p style="margin:10px 0 0 0; opacity:0.9; font-size:1.1em; color: white;">Manage students, instructors, and administrators.</p>
+  </div>
+
 <div class="stats-cards">
     <div class="stats-card"><h2><?php echo $totalUsers; ?></h2><p>Total Users</p></div>
     <div class="stats-card"><h2><?php echo $students; ?></h2><p>Students</p></div>

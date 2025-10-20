@@ -112,6 +112,70 @@ nav a[href="notifications.php"]:active {
   color: #ffffff;
   transform: scale(0.98);
 }
+
+/* analytics blue styling when active */
+nav a[href="admin.analytics.php"].active {
+  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+  color: #ffffff;
+  border-left: 4px solid #60b3e6;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+nav a[href="admin.analytics.php"]:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
+  transform: translateX(5px);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+}
+
+nav a[href="admin.analytics.php"]:active {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
+  color: #ffffff;
+  transform: scale(0.98);
+}
+
+/* settings blue styling when active */
+nav a[href="settings.php"].active {
+  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+  color: #ffffff;
+  border-left: 4px solid #60b3e6;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+nav a[href="settings.php"]:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
+  transform: translateX(5px);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+}
+
+nav a[href="settings.php"]:active {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
+  color: #ffffff;
+  transform: scale(0.98);
+}
+/* dashboard blue styling when active */
+nav a[href="admin.dashboard.php"].active {
+  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+  color: #ffffff;
+  border-left: 4px solid #60b3e6;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+nav a[href="admin.dashboard.php"]:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
+  transform: translateX(5px);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+}
+
+  nav a[href="admin.dashboard.php"]:active {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
+  color: #ffffff;
+  transform: scale(0.98);
+}
+
+
 .logout {
   color: red;
   text-decoration: none;

@@ -9,11 +9,14 @@ include_once 'sidebar.php';
 include_once 'topbar.php';
 ?>
 <link rel="stylesheet" href="admin.dashboard.css">
-<div class="main-content">
-  <div class="page-header">
-    <h1>Admin Dashboard</h1>
-    <p>System overview and user management.</p>
+<div class="main-content" style="max-width: 1560px; margin-left: 300px; margin-top: 120px;">
+  
+
+<div class="page-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 1560px;">
+    <h1 style="margin:0; font-size:2.5em; font-weight:300;color: white;">&#127968; Admin Dashboard</h1>
+    <p style="margin:10px 0 0 0; opacity:0.9; font-size:1.1em; color: white;">System overview and user management.</p>
   </div>
+
 
   <?php
   // Metrics from database

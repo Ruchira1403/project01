@@ -1,7 +1,7 @@
 /* Topbar styles for admin panel */
 .topbar {
   position: fixed;
-  left: 0px;
+  margin-left: 200px;
   right: 0;
   top: 30px;
   height: 64px;
