@@ -5,6 +5,8 @@ if (!isset($_SESSION["userid"])) {
   exit();
 }
 include_once '../../includes/dbh.inc.php';
+include_once 'sidebar.php';
+include_once 'topbar.php';
 ?>
 
 <!DOCTYPE html>
@@ -13,32 +15,19 @@ include_once '../../includes/dbh.inc.php';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>System Settings</title>
-  <link rel="stylesheet" href="settings.css">
+  <link rel="stylesheet" href="settingsk.css">
 </head>
 <body>
   <div class="container">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <h2 class="logo">GeoSurvey</h2>
-      <ul class="menu">
-        <li><a href="../dashboard.php">Dashboard</a></li>
-        <li><a href="../user-management.php">User Management</a></li>
-        <li><a href="../notifications.php">Notifications</a></li>
-        <li><a href="../analytics.php">Analytics</a></li>
-        <li class="active"><a href="settings.php">Settings</a></li>
-      </ul>
-      <a href="../../logout.php" class="logout">Logout</a>
-    </aside>
-
     <!-- Main Content -->
-    <main class="main">
-      <header class="topbar">
-        <h1>System Settings</h1>
-        <div class="user-info">
-          <span class="user-name">John Doe</span>
-          <span class="user-role">Student</span>
-        </div>
-      </header>
+    <main class="main" style="margin-left: 320px; padding: 20px; margin-top: 120px; max-width: 1560px; margin-right: 50px;">
+      
+    <div class="page-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 1560px;">
+    <h1 style="margin:0; font-size:2.5em; font-weight:300;color: white;">&#9881; Settings</h1>
+    <p style="margin:10px 0 0 0; opacity:0.9; font-size:1.1em; color: white;">Manage security and system settings.</p>
+  </div>
+
+
 
       <section class="settings">
         <div class="tabs">

@@ -49,7 +49,7 @@ if (isset($_POST["submit"])) {
         $_SESSION["userrole"] = $uidExists["usersRole"];
         $role = strtolower($uidExists["usersRole"]);
         if ($role === "admin") {
-            header("location: ../roleLogin/admin/admin.home.php");
+            header("location: ../roleLogin/admin/admin.dashboard.php");
         } elseif ($role === "instructor") {
             header("location: ../roleLogin/instructor/instructor.home.php");
         } else {

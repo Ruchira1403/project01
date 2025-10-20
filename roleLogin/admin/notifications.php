@@ -60,10 +60,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php include 'topbar.php'; ?>
 <?php include 'sidebar.php'; ?>
 
-<div class="main-content" style="margin-left: 320px; padding: 20px; margin-top: 180px;">
+<div class="main-content" style="margin-left: 320px; padding: 20px; margin-top: 120px; max-width: 1560px; margin-right: 50px;">
+
+
+<div class="page-header1" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 1560px;">
+    <h1 style="margin:0; font-size:2.5em; font-weight:300;color: white;">&#128276; Notifications</h1>
+    <p style="margin:10px 0 0 0; opacity:0.9; font-size:1.1em; color: white;">Send announcements and manage communications.</p>
+  </div>
+
+
   <div class="notifications-header">
-    <h1>Notifications</h1>
-    <p>Send announcements and manage communications</p>
 
     <div class="notifications-tabs">
       <button class="active">Compose</button>

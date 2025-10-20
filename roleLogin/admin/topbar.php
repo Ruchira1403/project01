@@ -4,7 +4,7 @@ include '../../includes/dbh.inc.php';
 
 <link rel="stylesheet" href="topbark.css">
 <div class="topbar">
-    <div class="topbar-left">
+    <div class="topbar-left" style="margin-left: 260px;">
         <img class="topbar-logo" src="../../images/2.jpg" alt="GeoSurvey Logo">
         <span class="page-title">GeoSurvey Portal</span>
         <span class="page-desc">- Admin</span>
