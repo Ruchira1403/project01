@@ -12,11 +12,13 @@ include_once 'topbar.php';
 <link rel="stylesheet" href="notifications-history.css">
 <link rel="stylesheet" href="sidebar.css">
 <link rel="stylesheet" href="topbar.css">
-<div class="main-content">
+<div class="main-content" style="margin-top: 100px; max-width: 1560px; margin-left: 300px; margin-right:50px">
   <div class="notifications-header">
-    <h1>Notifications</h1>
-    <p>Send announcements and manage communications</p>
-    <div class="notifications-tabs">
+  <div class="page-header1" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 1560px;">
+    <h1 style="margin:0; font-size:2.5em; font-weight:300;color: white;">&#128276; Notifications</h1>
+    <p style="margin:10px 0 0 0; opacity:0.9; font-size:1.1em; color: white;">Send announcements and manage communications.</p>
+  </div>
+    <div class="notifications-tabs" style="margin-bottom:50px">
       <button onclick="window.location.href='notifications.php'">Compose</button>
       <button class="active">History</button>
       <button onclick="window.location.href='notifications-analytics.php'" >Analytics</button>
