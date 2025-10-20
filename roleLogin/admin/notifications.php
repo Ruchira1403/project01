@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="modern-row">
           <!-- Audience -->
           <div class="modern-field">
-            <label for="audience-dropdown">Audience</label>
+            <label for="audience-dropdown ">Audience</label>
           <span style="color: red; font-size: 12px;">*</span>
             <div class="modern-input-icon-group audience-dropdown-wrapper">
               <select id="audience-dropdown" name="audience[]" class="audience-dropdown" multiple>
