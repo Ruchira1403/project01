@@ -14,9 +14,11 @@
   z-index: 100;
 }
 .logo {
-  font-size: 2.2em;
-  font-weight: bold;
-  margin-bottom: 18px;
+font-size: 1.4em;
+  font-weight: 700;
+  color: #0a3871;
+  padding: 36px 0 18px 36px;
+  letter-spacing: 0.5px;
 }
 .role {
   font-size: 1.1em;

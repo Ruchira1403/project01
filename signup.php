@@ -1,9 +1,20 @@
 <?php include_once 'header.php'; ?>
-<link rel="stylesheet" href="signup.css">
+<link rel="stylesheet" href="signupk.css">
+<style>
+    /* Shared background for login/signup pages */
+    body {
+        background-image: url('images/4.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+     
+</style>
 <div class="signup-main-bg">
     <div class="signup-container">
         <div class="signup-form-col">
-            <h1><img src="images/logo.jpg" alt="Surveyor">Welcome to GeoSurvey Academic Field Portal</h1>
+            <h1><img src="images/2.jpg" alt="Surveyor">Welcome to GeoSurvey Academic Field Portal</h1>
             <form action="includes/signup.inc.php" method="post">
                 <label for="name">Name with Initials</label>
                 <input type="text" id="name" name="name" required autocomplete="name">
@@ -43,9 +54,7 @@
             </form>
             <div class="login-link">Already have an account? <a href="login.php">Login</a></div>
         </div>
-        <div class="signup-img-col">
-            <img src="images/im01.jpg" alt="Surveyor Illustration">
-        </div>
+        
     </div>
 </div>
 <?php include_once 'footer.php'; ?>

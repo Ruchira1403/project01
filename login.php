@@ -3,6 +3,19 @@ include_once 'header.php';
 ?>
 <link rel="stylesheet" href="login.css">
 
+<style>
+  /* Shared background for login/signup pages */
+  body {
+    background-image: url('images/4.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+  /* Add slight overlay for readability */
+ 
+</style>
+
 <?php
 $errorMsg = '';
 if (isset($_GET['error'])) {
