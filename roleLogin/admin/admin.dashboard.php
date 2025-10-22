@@ -5,7 +5,7 @@ if (!isset($_SESSION["userid"]) || strtolower($_SESSION["userrole"]) !== "admin"
   exit();
 }
 include_once '../../includes/dbh.inc.php';
-include_once 'sidebar.php';
+ include_once 'sidebar.php';
 include_once 'topbar.php';
 ?>
 <link rel="stylesheet" href="admin.dashboard.css">

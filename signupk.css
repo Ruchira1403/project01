@@ -1,5 +1,5 @@
 .signup-main-bg {
-  background: #e6f2f7;
+  
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -7,11 +7,11 @@
 }
 .signup-container {
   display: flex;
-  background: #fff;
+  background: rgba(158, 206, 230, 0.6);
   border-radius: 16px;
   box-shadow: 0 2px 12px #b3c6d6;
   overflow: hidden;
-  max-width: 900px;
+  max-width: 600px;
   width: 100%;
 }
 .signup-form-col {
