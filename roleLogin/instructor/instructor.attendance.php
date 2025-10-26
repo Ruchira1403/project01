@@ -45,6 +45,41 @@ include_once 'topbar.php';
 .mark-btn:hover {
   background-color: #1976D2;
 }
+/* Summary cards layout - match header width and center */
+.attendance-summary {
+  max-width: 1560px;
+  margin: 20px auto;
+  /* align inner content with header padding */
+  padding: 0 30px;
+  box-sizing: border-box;
+  display: flex;
+   /* center cards and use a smaller gap to avoid large empty spaces */
+   justify-content: center;
+   gap: 18px;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+.summary-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.06);
+  padding: 22px 24px;
+  width: 420px;
+  /* make cards wider by increasing the flex-basis */
+   /* fixed base width and prevent cards from stretching to fill row */
+   flex: 0 1 340px;
+  text-align: center;
+}
+.summary-card .summary-value {
+  font-size: 28px;
+  font-weight: 600;
+  /* keep existing text color from page/theme */
+  margin: 6px 0 12px 0;
+}
+.summary-card .summary-desc {
+  /* keep existing description color */
+  font-size: 14px;
+}
 </style>
 <div class="main-content" style="margin-top: 80px;">
   <div class="page-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 1560px;">
@@ -56,9 +91,9 @@ include_once 'topbar.php';
       <div class="summary-title">Total Hours</div>
       <div class="summary-value">
         <?php
-        $instructorId = $_SESSION['userid'];
+        $instructorId = isset($_SESSION['userid']) ? $_SESSION['userid'] : 0;
         $hoursResult = $conn->query("SELECT SUM(TIMESTAMPDIFF(HOUR, startTime, endTime)) as total_hours FROM (SELECT DISTINCT attendanceDate, topic, startTime, endTime FROM attendance WHERE instructorId = $instructorId AND startTime IS NOT NULL AND endTime IS NOT NULL) as unique_sessions");
-        $totalHours = $hoursResult ? $hoursResult->fetch_assoc()['total_hours'] ?? 0 : 0;
+        $totalHours = ($hoursResult && $hoursResult->num_rows > 0) ? ($hoursResult->fetch_assoc()['total_hours'] ?? 0) : 0;
         echo $totalHours;
         ?>
       </div>
@@ -90,55 +125,28 @@ include_once 'topbar.php';
       </div>
       <div class="summary-desc">Class average (hours-based)</div>
     </div>
-    <div class="summary-card">
+    <div class="summary-card" style="width: 480px;">
       <div class="summary-title">Perfect Attendance</div>
       <div class="summary-value">
         <?php
-        // Count students with 100% attendance based on hours
+        // Count students with 100% attendance (no absences)
         $perfect = 0;
         $students = $conn->query("SELECT DISTINCT userUid FROM attendance WHERE instructorId = $instructorId");
         
-        // Get total session hours
-        $sessionsQuery = "SELECT DISTINCT attendanceDate, topic, startTime, endTime, 
-                         TIMESTAMPDIFF(HOUR, startTime, endTime) as session_hours 
-                         FROM attendance 
-                         WHERE instructorId = $instructorId AND startTime IS NOT NULL AND endTime IS NOT NULL";
-        $sessionsResult = $conn->query($sessionsQuery);
-        $totalSessionHours = 0;
-        $sessions = [];
-        
-        if ($sessionsResult && $sessionsResult->num_rows > 0) {
-          while ($session = $sessionsResult->fetch_assoc()) {
-            $sessionHours = $session['session_hours'];
-            $totalSessionHours += $sessionHours;
-            $sessions[] = [
-              'date' => $session['attendanceDate'],
-              'topic' => $session['topic'],
-              'hours' => $sessionHours
-            ];
-          }
-        }
-        
-        while ($student = $students->fetch_assoc()) {
-          $studentId = $student['userUid'];
-          $presentHours = 0;
+        // For each student, check if they have any 'absent' status
+        while ($student = $students->fetch_assoc()) { 
+          $studentId = $student['userUid']; 
           
-          // Calculate present hours for this student
-          foreach ($sessions as $session) {
-            $presentQuery = "SELECT COUNT(*) as present FROM attendance 
-                           WHERE instructorId = $instructorId 
-                           AND userUid = '$studentId' 
-                           AND attendanceDate = '{$session['date']}' 
-                           AND topic = '{$session['topic']}' 
-                           AND status = 'present'";
-            $presentResult = $conn->query($presentQuery);
-            if ($presentResult && $presentResult->fetch_assoc()['present'] > 0) {
-              $presentHours += $session['hours'];
-            }
-          }
+          // Check if this student has any absences
+          $absentQuery = "SELECT COUNT(*) as absent_count FROM attendance 
+                         WHERE instructorId = $instructorId 
+                         AND userUid = '$studentId' 
+                         AND status = 'absent'";
+          $absentResult = $conn->query($absentQuery);
+          $absentCount = $absentResult ? $absentResult->fetch_assoc()['absent_count'] : 0;
           
-          // Check if student has 100% attendance (all hours)
-          if ($presentHours >= $totalSessionHours && $totalSessionHours > 0) {
+          // If student has no absences, increment perfect attendance counter
+          if ($absentCount == 0) {
             $perfect++;
           }
         }
@@ -152,51 +160,50 @@ include_once 'topbar.php';
       <div class="summary-value summary-risk">
         <?php
         $risk = 0;
-        // Get all unique sessions with their durations
-        $sessionsQuery = "SELECT DISTINCT attendanceDate, topic, startTime, endTime, 
-                         TIMESTAMPDIFF(HOUR, startTime, endTime) as session_hours 
-                         FROM attendance 
-                         WHERE instructorId = $instructorId AND startTime IS NOT NULL AND endTime IS NOT NULL";
+        // Get all distinct sessions with durations (minutes)
+        $sessionsQuery = "SELECT DISTINCT attendanceDate, topic, startTime, endTime, TIMESTAMPDIFF(MINUTE, startTime, endTime) as session_minutes FROM attendance WHERE instructorId = $instructorId AND startTime IS NOT NULL AND endTime IS NOT NULL";
         $sessionsResult = $conn->query($sessionsQuery);
-        $totalSessionHours = 0;
         $sessions = [];
-        
         if ($sessionsResult && $sessionsResult->num_rows > 0) {
-          while ($session = $sessionsResult->fetch_assoc()) {
-            $sessionHours = $session['session_hours'];
-            $totalSessionHours += $sessionHours;
-            $sessions[] = [
-              'date' => $session['attendanceDate'],
-              'topic' => $session['topic'],
-              'hours' => $sessionHours
-            ];
+          while ($s = $sessionsResult->fetch_assoc()) {
+            $sessions[] = ['date' => $s['attendanceDate'], 'topic' => $s['topic'], 'minutes' => (int)$s['session_minutes']];
           }
         }
-        
-        // Calculate each student's attendance percentage based on hours
+
+        // For each student, sum present and absent minutes across sessions
         $students = $conn->query("SELECT DISTINCT userUid FROM attendance WHERE instructorId = $instructorId");
-        while ($student = $students->fetch_assoc()) {
-          $studentId = $student['userUid'];
-          $presentHours = 0;
-          
-          // Calculate present hours for this student
-          foreach ($sessions as $session) {
-            $presentQuery = "SELECT COUNT(*) as present FROM attendance 
-                           WHERE instructorId = $instructorId 
-                           AND userUid = '$studentId' 
-                           AND attendanceDate = '{$session['date']}' 
-                           AND topic = '{$session['topic']}' 
-                           AND status = 'present'";
-            $presentResult = $conn->query($presentQuery);
-            if ($presentResult && $presentResult->fetch_assoc()['present'] > 0) {
-              $presentHours += $session['hours'];
+        if ($students && $students->num_rows > 0 && count($sessions) > 0) {
+          while ($student = $students->fetch_assoc()) {
+            $studentId = $student['userUid'];
+            $presentMinutes = 0;
+            $absentMinutes = 0;
+
+            foreach ($sessions as $session) {
+              // Check if student has a present record for this session
+              $presentQuery = "SELECT COUNT(*) as present FROM attendance WHERE instructorId = $instructorId AND userUid = '$studentId' AND attendanceDate = '{$session['date']}' AND topic = '{$session['topic']}' AND status = 'present'";
+              $presentResult = $conn->query($presentQuery);
+              $isPresent = ($presentResult && $presentResult->fetch_assoc()['present'] > 0);
+
+              // Check if student has an absent record for this session
+              $absentQuery = "SELECT COUNT(*) as absent FROM attendance WHERE instructorId = $instructorId AND userUid = '$studentId' AND attendanceDate = '{$session['date']}' AND topic = '{$session['topic']}' AND status = 'absent'";
+              $absentResult = $conn->query($absentQuery);
+              $isAbsent = ($absentResult && $absentResult->fetch_assoc()['absent'] > 0);
+
+              if ($isPresent) {
+                $presentMinutes += $session['minutes'];
+              } elseif ($isAbsent) {
+                $absentMinutes += $session['minutes'];
+              }
+              // If neither present nor absent record exists, we ignore that session for this student
             }
-          }
-          
-          // Calculate percentage based on hours
-          $attendancePercentage = $totalSessionHours > 0 ? ($presentHours / $totalSessionHours) * 100 : 0;
-          if ($attendancePercentage < 80) {
-            $risk++;
+
+            $denom = $presentMinutes + $absentMinutes;
+            if ($denom > 0) {
+              $ratio = $presentMinutes / $denom;
+              if ($ratio < 0.8) {
+                $risk++;
+              }
+            }
           }
         }
         echo $risk;

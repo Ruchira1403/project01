@@ -115,6 +115,10 @@ if (isset($_SESSION['import_message'])) {
                     }
                     echo '<td>' . $lastLoginDisplay . '</td>';
                     echo '<td>';
+                    // If the user is a student, show a "View Profile" link to the student profile page
+                    if (strtolower($user['usersRole']) === 'student') {
+                        echo '<a class="action-btn view-profile" href="../student/profile.php?id=' . intval($user['usersId']) . '" title="View Profile" style="margin-right:6px; text-decoration:none;">View Profile</a>';
+                    }
                     echo '<form method="post" action="editUser.php" style="display:inline;">';
                     echo '<input type="hidden" name="userid" value="' . htmlspecialchars($user['usersId']) . '">' ;
                     echo '<button class="action-btn edit" title="Edit"><span>&#9998;</span></button>';
