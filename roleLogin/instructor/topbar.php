@@ -72,10 +72,39 @@ if (isset($_SESSION['useruid'])) {
             <span class="notification-count"><?php echo $stats['unreadNotifications']; ?></span>
         </span>
         <span class="user-info">
-            <span class="user-avatar"><?php echo $initials; ?></span>
-            <div class="info">
-                <div class="name" style="font-weight:bold; font-size:1.15em;"><?php echo htmlspecialchars($instructorName); ?></div>
-            </div>
+              <span class="user-avatar">
+                <?php
+                // Try to show instructor avatar from instructor_profiles
+                $avatarShown = false;
+                if (isset($_SESSION['userid'])) {
+                    $uid = $_SESSION['userid'];
+                    $avStmt = $conn->prepare('SELECT avatar FROM instructor_profiles WHERE userId = ? LIMIT 1');
+                    if ($avStmt) {
+                        $avStmt->bind_param('i', $uid);
+                        $avStmt->execute();
+                        $avRes = $avStmt->get_result();
+                        if ($avRes && $avRes->num_rows > 0) {
+                            $avRow = $avRes->fetch_assoc();
+                            if (!empty($avRow['avatar']) && file_exists(__DIR__ . '/uploads/avatar/' . $avRow['avatar'])) {
+                                echo '<img src="uploads/avatar/' . htmlspecialchars($avRow['avatar']) . '" alt="Profile Photo" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">';
+                                $avatarShown = true;
+                            }
+                        }
+                        $avStmt->close();
+                    }
+                }
+                if (!$avatarShown) {
+                    echo htmlspecialchars($initials);
+                }
+                ?>
+              </span>
+                    <div class="info">
+                        <a href="profile.php" style="text-decoration:none; color:inherit;">
+                            <div class="name" style="font-weight:bold; font-size:1.15em; cursor:pointer;">
+                                <?php echo htmlspecialchars($instructorName); ?>
+                            </div>
+                        </a>
+                    </div>
         </span>
     </div>
 </div>
