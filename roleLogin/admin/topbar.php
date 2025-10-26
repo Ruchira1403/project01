@@ -187,23 +187,43 @@ include '../../includes/dbh.inc.php';
     <span class="user-info">
       <span class="user-avatar">
         <?php
-        if (isset($_SESSION['useruid'])) {
-          $name = $_SESSION['useruid'];
-          $initials = '';
-          $parts = explode(' ', $name);
-          foreach ($parts as $part) {
-            if (strlen($part) > 0) {
-              $initials .= strtoupper($part[0]);
+        $avatarShown = false;
+        if (isset($_SESSION['userid'])) {
+          $uid = $_SESSION['userid'];
+          $avStmt = $conn->prepare('SELECT avatar FROM admin_profiles WHERE userId = ? LIMIT 1');
+          if ($avStmt) {
+            $avStmt->bind_param('i', $uid);
+            $avStmt->execute();
+            $avRes = $avStmt->get_result();
+            if ($avRes && $avRes->num_rows > 0) {
+              $avRow = $avRes->fetch_assoc();
+              if (!empty($avRow['avatar']) && file_exists(__DIR__ . '/uploads/avatar/' . $avRow['avatar'])) {
+                echo '<img src="uploads/avatar/' . htmlspecialchars($avRow['avatar']) . '" alt="Profile Photo" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">';
+                $avatarShown = true;
+              }
             }
+            $avStmt->close();
           }
-          echo $initials;
-        } else {
-          echo 'NA';
+        }
+        if (!$avatarShown) {
+          if (isset($_SESSION['useruid'])) {
+            $name = $_SESSION['useruid'];
+            $initials = '';
+            $parts = explode(' ', $name);
+            foreach ($parts as $part) {
+              if (strlen($part) > 0) {
+                $initials .= strtoupper($part[0]);
+              }
+            }
+            echo $initials;
+          } else {
+            echo 'NA';
+          }
         }
         ?>
       </span>
       <div class="info">
-        <div class="name"><?php echo htmlspecialchars($_SESSION['useruid'] ?? 'User'); ?></div>
+        <a href="profile.php" style="text-decoration:none; color:inherit;"><div class="name" style="cursor:pointer;"><?php echo htmlspecialchars($_SESSION['useruid'] ?? 'User'); ?></div></a>
       </div>
     </span>
   </div>

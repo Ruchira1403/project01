@@ -4,62 +4,55 @@ include_once 'sidebar.php';
 include_once 'topbar.php';
 include_once '../../includes/dbh.inc.php';
 
-// Only allow students or admins to view (admins can view any student's profile via ?id=)
 $viewerRole = $_SESSION['userrole'] ?? '';
 $viewerId = $_SESSION['userid'] ?? 0;
 
-// Determine target student ID
-$studentId = isset($_GET['id']) ? intval($_GET['id']) : $viewerId;
+// Determine target instructor ID
+$instructorId = isset($_GET['id']) ? intval($_GET['id']) : $viewerId;
 
-// If not logged in, redirect to login
 if (!$viewerId) {
     header('Location: ../../login.php');
     exit();
 }
 
-// If viewer is student and trying to view another student's profile, block
-if (strtolower($viewerRole) === 'student' && $studentId !== $viewerId) {
+// Only allow instructor to view/edit own profile, or admin to view/edit any
+if (strtolower($viewerRole) === 'instructor' && $instructorId !== $viewerId) {
     echo 'Access denied.';
     exit();
 }
 
 // Fetch base user data
-$stmt = $conn->prepare('SELECT usersId, usersName, usersUid, usersEmail, usersRole, batch FROM users WHERE usersId = ? LIMIT 1');
-$stmt->bind_param('i', $studentId);
+$stmt = $conn->prepare('SELECT usersId, usersName, usersUid, usersEmail, usersRole FROM users WHERE usersId = ? LIMIT 1');
+$stmt->bind_param('i', $instructorId);
 $stmt->execute();
 $uRes = $stmt->get_result();
 $user = $uRes->fetch_assoc();
 $stmt->close();
 
-// Fetch profile data from student_profiles table (nullable)
+// Fetch profile data from instructor_profiles table (nullable)
 $profile = [
     'phone' => '',
     'address' => '',
-    'degree' => '',
-    'advisor' => '',
-    'expected_graduation' => '',
+    'department' => '',
     'avatar' => ''
 ];
 
-$prep = $conn->prepare('SELECT phone, address, degree, advisor, expected_graduation, avatar FROM student_profiles WHERE userId = ? LIMIT 1');
-$prep->bind_param('i', $studentId);
+$prep = $conn->prepare('SELECT phone, address, department, avatar FROM instructor_profiles WHERE userId = ? LIMIT 1');
+$prep->bind_param('i', $instructorId);
 $prep->execute();
 $pRes = $prep->get_result();
 if ($pRes && $pRes->num_rows > 0) {
     $profile = $pRes->fetch_assoc();
 }
 $prep->close();
-
-// If form submitted and viewer allowed to edit (student himself or admin), handle in separate save endpoint via POST
 ?>
 <!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Student Profile</title>
+    <title>Instructor Profile</title>
     <link rel="stylesheet" href="profile.css">
     <style>
-        /* Minimal inline styles to approximate attachment look */
         body { font-family: Arial, sans-serif; color:#111; }
         .container { max-width:1000px; margin-top:150px; margin-left:250px; }
         .card { border:1px solid #ccc; padding:20px; display:flex; gap:20px; align-items:flex-start; }
@@ -76,9 +69,8 @@ $prep->close();
 </head>
 <body>
     <div class="container">
-        <h1>Student Profile</h1>
-        <p>Manage your academic information and track your progress</p>
-
+        <h1>Instructor Profile</h1>
+        <p>Manage your personal and department information</p>
         <div class="card">
             <div class="left">
                 <div class="avatar">
@@ -100,7 +92,7 @@ $prep->close();
                 <div style="margin-top:12px; font-weight:bold; font-size:1.05em;"><?php echo htmlspecialchars($user['usersName']); ?></div>
                 <div style="color:#666;">ID : <?php echo htmlspecialchars($user['usersUid']); ?></div>
                 <div style="margin-top:8px;">
-                    <?php if ($viewerId === $studentId || strtolower($viewerRole) === 'admin'): ?>
+                    <?php if ($viewerId === $instructorId || strtolower($viewerRole) === 'admin'): ?>
                         <a class="edit-btn" href="#edit" onclick="document.getElementById('edit-form').style.display='block';return false;">Edit Profile</a>
                     <?php endif; ?>
                 </div>
@@ -113,17 +105,14 @@ $prep->close();
                     <div class="field">📍 <?php echo htmlspecialchars($profile['address']); ?></div>
                 </div>
                 <div class="section">
-                    <div class="label">Academic Information</div>
-                    <div class="field">🎓 <?php echo htmlspecialchars($profile['degree']); ?></div>
-                    <div class="field">👤 Advisor: <?php echo htmlspecialchars($profile['advisor']); ?></div>
-                    <div class="field">📅 Expected Graduation: <?php echo htmlspecialchars($profile['expected_graduation']); ?></div>
+                    <div class="label">Department Information</div>
+                    <div class="field">🏢 <?php echo htmlspecialchars($profile['department']); ?></div>
                 </div>
             </div>
         </div>
-
         <div id="edit-form" style="display:none; margin-top:20px;">
             <form method="post" action="save_profile.php" enctype="multipart/form-data">
-                <input type="hidden" name="userId" value="<?php echo intval($studentId); ?>">
+                <input type="hidden" name="userId" value="<?php echo intval($instructorId); ?>">
                 <div style="display:flex; gap:12px;">
                     <div style="flex:1;">
                         <label class="label">Email</label>
@@ -140,18 +129,8 @@ $prep->close();
                         <input class="input" name="address" value="<?php echo htmlspecialchars($profile['address']); ?>">
                     </div>
                     <div style="flex:1;">
-                        <label class="label">Degree</label>
-                        <input class="input" name="degree" value="<?php echo htmlspecialchars($profile['degree']); ?>">
-                    </div>
-                </div>
-                <div style="margin-top:12px; display:flex; gap:12px;">
-                    <div style="flex:1;">
-                        <label class="label">Advisor</label>
-                        <input class="input" name="advisor" value="<?php echo htmlspecialchars($profile['advisor']); ?>">
-                    </div>
-                    <div style="flex:1;">
-                        <label class="label">Expected Graduation</label>
-                        <input class="input" name="expected_graduation" value="<?php echo htmlspecialchars($profile['expected_graduation']); ?>">
+                        <label class="label">Department</label>
+                        <input class="input" name="department" value="<?php echo htmlspecialchars($profile['department']); ?>">
                     </div>
                 </div>
                 <div style="margin-top:12px; display:flex; gap:12px;">
@@ -168,7 +147,6 @@ $prep->close();
                 </div>
             </form>
         </div>
-
     </div>
 </body>
 </html>
