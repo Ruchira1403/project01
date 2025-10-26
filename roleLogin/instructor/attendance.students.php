@@ -10,7 +10,8 @@ if (isset($_POST['batch'])) {
       $uid = htmlspecialchars($row['usersUid']);
       echo '<tr>';
       echo '<td><input type="hidden" name="userUid[]" value="'.$uid.'">'.$uid.'</td>';
-      echo '<td><select name="status[]"><option value="present">Present</option><option value="absent">Absent</option></select></td>';
+      // Add an option for students who are not part of this group. These will be ignored when saving.
+      echo '<td><select name="status[]"><option value="present">Present</option><option value="absent">Absent</option><option value="not_in_group">Not in group</option></select></td>';
       echo '</tr>';
     }
     echo '</table>';

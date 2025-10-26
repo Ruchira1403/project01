@@ -52,17 +52,31 @@ include '../../includes/dbh.inc.php';
         <span class="user-info">
                 <span class="user-avatar">
                     <?php 
-                    // Display initials from usersName
-                    if (isset($_SESSION['useruid'])) {
-                        $name = $_SESSION['useruid'];
-                        $initials = '';
-                        $parts = explode(' ', $name);
-                        foreach ($parts as $part) {
-                            if (strlen($part) > 0) {
-                                $initials .= strtoupper($part[0]);
+                    if (isset($_SESSION['userid'])) {
+                        // Check if user has profile photo
+                        $userId = $_SESSION['userid'];
+                        $avatarStmt = $conn->prepare("SELECT avatar FROM student_profiles WHERE userId = ? LIMIT 1");
+                        $avatarStmt->bind_param("i", $userId);
+                        $avatarStmt->execute();
+                        $avatarResult = $avatarStmt->get_result();
+                        $avatarRow = $avatarResult->fetch_assoc();
+                        $avatarStmt->close();
+
+                        if ($avatarRow && $avatarRow['avatar'] && file_exists(__DIR__ . '/uploads/avatar/' . $avatarRow['avatar'])) {
+                            // Show profile photo
+                            echo '<img src="uploads/avatar/' . htmlspecialchars($avatarRow['avatar']) . '" alt="Profile Photo" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">';
+                        } else {
+                            // Show initials if no photo
+                            $name = $_SESSION['useruid'];
+                            $initials = '';
+                            $parts = explode(' ', $name);
+                            foreach ($parts as $part) {
+                                if (strlen($part) > 0) {
+                                    $initials .= strtoupper($part[0]);
+                                }
                             }
+                            echo $initials;
                         }
-                        echo $initials;
                     } else {
                         echo 'NA';
                     }
@@ -70,8 +84,10 @@ include '../../includes/dbh.inc.php';
                 </span>
                 <div class="info">
                    
-                    <div class="name" style="font-weight:bold; font-size:1.15em;"><?php echo htmlspecialchars($_SESSION['useruid']); ?></div>
-                     
+                    <div class="name" style="font-weight:bold; font-size:1.15em;">
+                        <a href="profile.php" style="text-decoration:none; color:inherit;"><?php echo htmlspecialchars($_SESSION['useruid']); ?></a>
+                    </div>
+                    
                 </div>
         </span>
     </div>
